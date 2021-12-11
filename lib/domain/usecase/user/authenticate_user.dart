@@ -8,9 +8,9 @@ class AuthenticateUseCase {
 
   AuthenticateUseCase(this._userRepo);
 
-  Future<User> execute(String email, String password, AuthMode authMode) {
-    return authMode == AuthMode.signUp
+  Future<User> execute(String email, String password, AuthMode authMode) async {
+    return await (authMode == AuthMode.signUp
         ? _userRepo.signUp(email, password)
-        : _userRepo.signIn(email, password);
+        : _userRepo.signIn(email, password));
   }
 }

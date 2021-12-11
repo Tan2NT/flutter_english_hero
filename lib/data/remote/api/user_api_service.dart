@@ -6,7 +6,7 @@ import '../../../core/exception/http_exception.dart';
 import '../../common/model/user/user_entity.dart';
 
 class UserApiService {
-  static const BASE_URL = "'https://identitytoolkit.googleapis.com/v1/accounts";
+  static const BASE_URL = "https://identitytoolkit.googleapis.com/v1/accounts";
   static const API_KEY = "AIzaSyCTIVquwOn2K4tmvJYAocEmTHJS4xYfEhI";
 
   Future<UserEntity> signUp(String email, String password) async {

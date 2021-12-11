@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../presentation/user/user_provider.dart';
 import '../ui/helpers/custom_route.dart';
-import '../ui/english/topic/english_topics_screen.dart';
+import '../ui/english/topic/list/english_topics_screen.dart';
 import '../ui/splash_screen.dart';
 import '../ui/authentication/auth_screen.dart';
 
@@ -30,16 +30,17 @@ class Application extends StatelessWidget {
                   TargetPlatform.iOS: CustomPageTransitionBuilder()
                 })),
             home: auth.isAuth
-                ? EnglishTopicsScreen()
+                ? const EnglishTopicsScreen()
                 : FutureBuilder(
                     future: auth.tryAutoLogin(),
                     builder: (context, authResultSnapshot) =>
                         authResultSnapshot.connectionState ==
                                 ConnectionState.waiting
-                            ? SplashScreen()
+                            ? const SplashScreen()
                             : AuthScreen()),
             routes: {
-              EnglishTopicsScreen.routeName: (ctx) => EnglishTopicsScreen(),
+              EnglishTopicsScreen.routeName: (ctx) =>
+                  const EnglishTopicsScreen(),
               AuthScreen.routeName: (ctx) => AuthScreen(),
             },
           ),

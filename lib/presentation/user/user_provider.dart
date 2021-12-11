@@ -10,7 +10,7 @@ import '../../domain/model/user/user.dart';
 
 class UserProvider with ChangeNotifier {
   User _user = User(email: '', userId: '', token: '', expiryDate: null);
-  Timer? _authTimer = null;
+  Timer? _authTimer;
   String errorMessage = '';
 
   AuthenticateUseCase _authenticateUseCase;
@@ -46,7 +46,7 @@ class UserProvider with ChangeNotifier {
     try {
       _user = await _authenticateUseCase.execute(email, password, authMode);
       errorMessage = '';
-
+      _saveUserData();
       return true;
     } on HttpException catch (error) {
       errorMessage = 'Authentication failed';
