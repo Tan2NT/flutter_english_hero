@@ -17,7 +17,7 @@ class EnglishTopic {
       'id': id,
       'name': name,
       'description_en': descriptionEn,
-      'imageUrl': imageUrl
+      'image_url': imageUrl
     };
   }
 }

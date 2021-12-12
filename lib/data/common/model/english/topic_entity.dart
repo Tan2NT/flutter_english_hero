@@ -15,7 +15,7 @@ class EnglishTopicEntity {
         id: topicData['id'],
         name: topicData['name'],
         descriptionEn: topicData['description_en'],
-        imageUrl: topicData['imageUrl']);
+        imageUrl: topicData['image_url']);
   }
 
   Map<String, Object> toMap() {
@@ -23,7 +23,7 @@ class EnglishTopicEntity {
       'id': id,
       'name': name,
       'description_en': descriptionEn,
-      'imageUrl': imageUrl
+      'image_url': imageUrl
     };
   }
 }

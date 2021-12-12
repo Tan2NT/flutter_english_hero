@@ -15,7 +15,7 @@ class EnglishDatabase {
     _db ??= await openDatabase(path, version: 2,
         onCreate: (Database db, int version) async {
       await db.execute(
-          'CREATE TABLE $english_topic_table_name (id INTERGER PRIMARY KEY, name TEXT, description_en TEXT, imageUrl TEXT)');
+          'CREATE TABLE $english_topic_table_name (id INTERGER PRIMARY KEY, name TEXT, description_en TEXT, image_url TEXT)');
     });
 
     return _db;
