@@ -1,6 +1,7 @@
 import 'package:english_hero/domain/repository/english/english_topic_repository.dart';
 import 'package:english_hero/domain/repository/user/user_repository.dart';
 import 'package:english_hero/domain/usecase/english/fetch_all_topics_use_case.dart';
+import 'package:english_hero/domain/usecase/english/get_all_english_topic_use_case.dart';
 import 'package:english_hero/domain/usecase/user/authenticate_user.dart';
 
 import '../injection/injetion.dart';
@@ -13,5 +14,7 @@ class UseCaseModules extends DIModule {
         AuthenticateUseCase(getIt.get<UserRepository>()));
     getIt.registerSingleton<FetchAllTopicsUseCase>(
         FetchAllTopicsUseCase(getIt.get<EnglishTopicRepository>()));
+    getIt.registerSingleton<GetAllTopicsUseCase>(
+        GetAllTopicsUseCase(getIt.get<EnglishTopicRepository>()));
   }
 }

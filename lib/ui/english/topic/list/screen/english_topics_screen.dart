@@ -25,6 +25,7 @@ class EnglishTopicsScreen extends StatelessWidget {
   Widget listTopicWidget() => ScopedModelDescendant<EnglishTopicsViewModel>(
           builder: (ctx, child, model) {
         viewModel.fetchAllTopics();
+        viewModel.getAllTopics();
         return ListView.builder(
           itemBuilder: (ctx, index) {
             return EnglishTopicItemView(viewModel.englisTopics[index]);

@@ -1,3 +1,4 @@
+import 'package:english_hero/data/local/english_local_data_source.dart';
 import 'package:english_hero/data/remote/data_source/english_remote_data_source.dart';
 import 'package:english_hero/data/remote/data_source/user_remote_data_source.dart';
 import 'package:english_hero/domain/repository/english/english_topic_repository.dart';
@@ -11,7 +12,8 @@ class RepositoryModules extends DIModule {
   Future<void> provides() async {
     getIt.registerSingleton<UserRepository>(
         UserRepositoryImpl(getIt.get<UserRemoteDataSource>()));
-    getIt.registerSingleton<EnglishTopicRepository>(
-        EnglishTopicRepositoryimpl(getIt.get<EnglishRemoteDataSource>()));
+    getIt.registerSingleton<EnglishTopicRepository>(EnglishTopicRepositoryimpl(
+        getIt.get<EnglishRemoteDataSource>(),
+        getIt.get<EnglishLocalDataSource>()));
   }
 }

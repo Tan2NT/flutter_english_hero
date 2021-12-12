@@ -11,4 +11,13 @@ class EnglishTopic {
       required this.name,
       required this.descriptionEn,
       required this.imageUrl});
+
+  Map<String, Object> toMap() {
+    return <String, Object>{
+      'id': id,
+      'name': name,
+      'description_en': descriptionEn,
+      'imageUrl': imageUrl
+    };
+  }
 }
