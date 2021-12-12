@@ -13,8 +13,8 @@ class UserEntity {
   factory UserEntity.fromJson(Map<String, dynamic> userData) {
     return UserEntity(
         email: userData['email'],
-        userId: 'localId',
-        token: 'idToken',
+        userId: userData['localId'],
+        token: userData['idToken'],
         expiryDate: DateTime.now()
             .add(Duration(seconds: int.parse(userData['expiresIn']))));
   }

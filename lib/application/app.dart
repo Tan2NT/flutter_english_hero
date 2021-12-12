@@ -1,10 +1,13 @@
+import 'package:english_hero/di/injection/injetion.dart';
+import 'package:english_hero/presentation/english/english_topics_view_model.dart';
+import 'package:english_hero/presentation/utils/shared_preference_util.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 
-import '../presentation/user/user_provider.dart';
+import '../presentation/provider/user_provider.dart';
 import '../ui/helpers/custom_route.dart';
-import '../ui/english/topic/list/english_topics_screen.dart';
+import '../ui/english/topic/list/screen/english_topics_screen.dart';
 import '../ui/splash_screen.dart';
 import '../ui/authentication/auth_screen.dart';
 
@@ -30,7 +33,7 @@ class Application extends StatelessWidget {
                   TargetPlatform.iOS: CustomPageTransitionBuilder()
                 })),
             home: auth.isAuth
-                ? const EnglishTopicsScreen()
+                ? EnglishTopicsScreen(getIt.get<EnglishTopicsViewModel>())
                 : FutureBuilder(
                     future: auth.tryAutoLogin(),
                     builder: (context, authResultSnapshot) =>
@@ -40,7 +43,7 @@ class Application extends StatelessWidget {
                             : AuthScreen()),
             routes: {
               EnglishTopicsScreen.routeName: (ctx) =>
-                  const EnglishTopicsScreen(),
+                  EnglishTopicsScreen(getIt.get<EnglishTopicsViewModel>()),
               AuthScreen.routeName: (ctx) => AuthScreen(),
             },
           ),

@@ -1,7 +1,8 @@
 import 'package:english_hero/core/exception/http_exception.dart';
 import 'package:english_hero/domain/model/auth_mode.dart';
+import 'package:english_hero/presentation/utils/constants.dart';
+import 'package:english_hero/presentation/utils/shared_preference_util.dart';
 import 'package:flutter/foundation.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import 'dart:async';
 
@@ -18,15 +19,12 @@ class UserProvider with ChangeNotifier {
   UserProvider(this._authenticateUseCase);
 
   String get token {
-    if (_user.expiryDate == null) return '';
-    if (_user.expiryDate!.isAfter(DateTime.now()) && _user.token.isNotEmpty) {
-      return _user.token;
-    }
-    return '';
+    final savedUser = loadSavedUser();
+    return savedUser == null ? '' : savedUser.token;
   }
 
   bool get isAuth {
-    return token.isNotEmpty;
+    return loadSavedUser() != null;
   }
 
   String get userId {
@@ -68,41 +66,46 @@ class UserProvider with ChangeNotifier {
   }
 
   void _saveUserData() async {
-    final prefs = await SharedPreferences.getInstance();
     final userData = json.encode({
       'email': _user.email,
       'token': _user.token,
       'userId': _user.userId,
       'expiryDate': _user.expiryDate?.toIso8601String()
     });
-    prefs.setString('userData', userData);
+    PreferenceUtils.setString(Constants.USER_DATA_KEY, userData);
+    PreferenceUtils.setString(Constants.USER_TOKEN_KEY, _user.token);
   }
 
   Future<bool> tryAutoLogin() async {
-    final prefs = await SharedPreferences.getInstance();
-    if (!prefs.containsKey('userData')) {
-      return false;
+    final loadedUser = loadSavedUser();
+    if (loadedUser == null) return false;
+
+    _user = loadedUser;
+    notifyListeners();
+    _autoLogout();
+    return true;
+  }
+
+  User? loadSavedUser() {
+    final encodedUserData = PreferenceUtils.getString(Constants.USER_DATA_KEY);
+    if (encodedUserData.isEmpty) {
+      return null;
     }
-    try {
-      final encodedUserData = prefs.getString('userData');
-      final extractedUserData =
-          json.decode(encodedUserData!) as Map<String, dynamic>;
-      final expiryDate =
-          DateTime.parse(extractedUserData['expiryDate'] as String);
-      if (expiryDate.isBefore(DateTime.now())) {
-        return false;
-      }
-      _user = User(
-          email: extractedUserData['email'] as String,
-          userId: extractedUserData['userId'] as String,
-          token: extractedUserData['token'] as String,
-          expiryDate: expiryDate);
-      notifyListeners();
-      _autoLogout();
-      return true;
-    } catch (error) {
-      return false;
+
+    final extractedUserData =
+        json.decode(encodedUserData) as Map<String, dynamic>;
+    final expiryDate =
+        DateTime.parse(extractedUserData['expiryDate'] as String);
+
+    if (expiryDate.isBefore(DateTime.now())) {
+      return null;
     }
+
+    return User(
+        email: extractedUserData['email'] as String,
+        userId: extractedUserData['userId'] as String,
+        token: extractedUserData['token'] as String,
+        expiryDate: expiryDate);
   }
 
   Future<void> logout() async {
@@ -113,8 +116,8 @@ class UserProvider with ChangeNotifier {
     }
     errorMessage = '';
     notifyListeners();
-    final prefs = await SharedPreferences.getInstance();
-    prefs.clear();
+    PreferenceUtils.setString(Constants.USER_DATA_KEY, "");
+    PreferenceUtils.setString(Constants.USER_TOKEN_KEY, "");
   }
 
   void _autoLogout() {

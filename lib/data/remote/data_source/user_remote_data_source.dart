@@ -1,5 +1,4 @@
-import 'package:english_hero/data/remote/api/user_api_service.dart';
-import 'dart:convert';
+import 'package:english_hero/data/remote/api/user/user_api_service.dart';
 import '../../common/model/user/user_entity.dart';
 
 abstract class UserRemoteDataSource {

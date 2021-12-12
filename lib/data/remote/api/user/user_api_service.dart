@@ -2,8 +2,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:async';
 
-import '../../../core/exception/http_exception.dart';
-import '../../common/model/user/user_entity.dart';
+import '../../../../core/exception/http_exception.dart';
+import '../../../common/model/user/user_entity.dart';
 
 class UserApiService {
   static const BASE_URL = "https://identitytoolkit.googleapis.com/v1/accounts";

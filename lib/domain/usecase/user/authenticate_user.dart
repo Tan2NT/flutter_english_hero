@@ -1,7 +1,7 @@
 import 'package:english_hero/domain/model/auth_mode.dart';
 
 import '../../model/user/user.dart';
-import '../../repository/user_repository.dart';
+import '../../repository/user/user_repository.dart';
 
 class AuthenticateUseCase {
   UserRepository _userRepo;
