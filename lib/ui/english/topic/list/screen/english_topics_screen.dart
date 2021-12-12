@@ -1,5 +1,6 @@
 import 'package:english_hero/presentation/english/english_topics_view_model.dart';
 import 'package:english_hero/ui/app_top_bar.dart';
+import 'package:english_hero/ui/english/topic/list/widget/english_topic_item.dart';
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 
@@ -26,7 +27,7 @@ class EnglishTopicsScreen extends StatelessWidget {
         viewModel.fetchAllTopics();
         return ListView.builder(
           itemBuilder: (ctx, index) {
-            return Text(viewModel.englisTopics[index].name);
+            return EnglishTopicItemView(viewModel.englisTopics[index]);
           },
           itemCount: viewModel.englisTopics.length,
         );
