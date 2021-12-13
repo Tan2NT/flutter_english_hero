@@ -6,6 +6,7 @@ import 'package:english_hero/domain/usecase/english/fetch_vocabularies_by_topic_
 import 'package:english_hero/domain/usecase/english/get_all_vocabularies_by_topic_use_case.dart';
 import 'package:english_hero/presentation/utils/constants.dart';
 import 'package:english_hero/presentation/utils/shared_preference_util.dart';
+import 'package:flutter/foundation.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:scoped_model/scoped_model.dart';
 
@@ -35,10 +36,11 @@ class EnglishTopicItemDetailsViewModel extends Model {
     return savedVocabularies;
   }
 
-  void updateVocabularies(List<Vocabulary> newTopics) {
-    if (newTopics.isNotEmpty) {
+  void updateVocabularies(List<Vocabulary> newVocabularies) {
+    if (newVocabularies.isNotEmpty &&
+        listEquals(newVocabularies, _vocabularies)) {
       _vocabularies.clear();
-      _vocabularies = newTopics;
+      _vocabularies = newVocabularies;
       notifyListeners();
     }
   }

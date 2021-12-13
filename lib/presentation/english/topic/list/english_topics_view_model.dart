@@ -3,6 +3,7 @@ import 'package:english_hero/domain/usecase/english/fetch_all_topics_use_case.da
 import 'package:english_hero/domain/usecase/english/get_all_english_topic_use_case.dart';
 import 'package:english_hero/presentation/utils/constants.dart';
 import 'package:english_hero/presentation/utils/shared_preference_util.dart';
+import 'package:flutter/foundation.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:scoped_model/scoped_model.dart';
 
@@ -28,7 +29,7 @@ class EnglishTopicsViewModel extends Model {
   }
 
   void updateTopics(List<EnglishTopic> newTopics) {
-    if (newTopics.isNotEmpty) {
+    if (newTopics.isNotEmpty && !listEquals(newTopics, englisTopics)) {
       englisTopics.clear();
       englisTopics = newTopics;
       notifyListeners();
