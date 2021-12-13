@@ -13,9 +13,14 @@ class EnglishVocabulariesDAO {
 
   Future<List<VocabularyEntity>> getVocabulariesByTopic(int topicId) async {
     if (_db == null) return [];
+    List<Map<String, dynamic>> maps = [];
 
-    List<Map<String, dynamic>> maps = await _db!.rawQuery(
-        'SELECT * from ${EnglishDatabase.english_vocabularies_table_name} WHERE topic_id = $topicId');
+    try {
+      maps = await _db!.rawQuery(
+          'SELECT * from ${EnglishDatabase.english_vocabularies_table_name} WHERE topic_id = $topicId');
+    } catch (error) {
+      print(error.toString());
+    }
 
     return maps.isNotEmpty
         ? maps.map((e) => VocabularyEntity.fromJson(e)).toList()

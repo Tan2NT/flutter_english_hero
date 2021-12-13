@@ -13,13 +13,13 @@ class EnglishDatabase {
     var databasesPath = await getDatabasesPath();
     String path = join(databasesPath, '$database_name');
 
-    _db ??= await openDatabase(path, version: 2,
+    _db ??= await openDatabase(path, version: 4,
         onCreate: (Database db, int version) async {
-      await db.execute(
+      db.execute(
           'CREATE TABLE $english_topics_table_name (id INTERGER PRIMARY KEY, name TEXT, description_en TEXT, image_url TEXT)');
 
-      await db.execute(
-          'CREATE TABLE $english_vocabularies_table_name (word INTERGER PRIMARY KEY, meaning_vi TEXT)');
+      db.execute(
+          'CREATE TABLE $english_vocabularies_table_name (word INTERGER PRIMARY KEY, meaning_vi TEXT, topic_id INTERGER)');
     });
 
     return _db;

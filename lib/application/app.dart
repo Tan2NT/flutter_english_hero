@@ -1,13 +1,15 @@
 import 'package:english_hero/di/injection/injetion.dart';
-import 'package:english_hero/presentation/english/english_topics_view_model.dart';
+import 'package:english_hero/presentation/english/topic/details/english_topic_item_details_view_model.dart';
+import 'package:english_hero/presentation/english/topic/list/english_topics_view_model.dart';
 import 'package:english_hero/presentation/utils/shared_preference_util.dart';
+import 'package:english_hero/ui/english/topic/details/english_topic_item_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 
 import '../presentation/provider/user_provider.dart';
 import '../ui/helpers/custom_route.dart';
-import '../ui/english/topic/list/screen/english_topics_screen.dart';
+import '../ui/english/topic/list/english_topics_screen.dart';
 import '../ui/splash_screen.dart';
 import '../ui/authentication/auth_screen.dart';
 
@@ -45,6 +47,9 @@ class Application extends StatelessWidget {
               EnglishTopicsScreen.routeName: (ctx) =>
                   EnglishTopicsScreen(getIt.get<EnglishTopicsViewModel>()),
               AuthScreen.routeName: (ctx) => AuthScreen(),
+              EnglishTopicItemDetailsScreen.routeName: (ctx) =>
+                  EnglishTopicItemDetailsScreen(
+                      getIt.get<EnglishTopicItemDetailsViewModel>())
             },
           ),
         ));

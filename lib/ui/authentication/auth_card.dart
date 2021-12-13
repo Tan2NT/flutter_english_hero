@@ -1,5 +1,5 @@
 import 'package:english_hero/domain/model/auth_mode.dart';
-import 'package:english_hero/ui/english/topic/list/screen/english_topics_screen.dart';
+import 'package:english_hero/ui/english/topic/list/english_topics_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

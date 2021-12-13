@@ -14,8 +14,14 @@ class EnglishTopicDAO {
   Future<List<EnglishTopicEntity>> getTopics() async {
     if (_db == null) return [];
 
-    List<Map<String, dynamic>> maps = await _db!
-        .rawQuery('SELECT * from ${EnglishDatabase.english_topics_table_name}');
+    List<Map<String, dynamic>> maps = [];
+
+    try {
+      maps = await _db!.rawQuery(
+          'SELECT * from ${EnglishDatabase.english_topics_table_name}');
+    } catch (error) {
+      print(error.toString());
+    }
 
     return maps.isNotEmpty
         ? maps.map((e) => EnglishTopicEntity.fromJson(e)).toList()
