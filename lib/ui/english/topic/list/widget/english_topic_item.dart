@@ -12,9 +12,9 @@ class EnglishTopicItemView extends StatelessWidget {
       width: MediaQuery.of(context).size.width * 0.94,
       child: Card(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(0.0),
+          borderRadius: BorderRadius.circular(5.0),
         ),
-        color: Colors.white70,
+        color: Colors.white,
         elevation: 10,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -23,10 +23,13 @@ class EnglishTopicItemView extends StatelessWidget {
               padding: const EdgeInsets.all(2.0),
               width: MediaQuery.of(context).size.width * 0.28,
               height: MediaQuery.of(context).size.width * 0.28,
-              child: FadeInImage(
-                placeholder: const AssetImage('assets/images/english_hero.jpg'),
-                image: NetworkImage(_englishTopic.imageUrl),
-                fit: BoxFit.cover,
+              child: Center(
+                child: FadeInImage(
+                  placeholder:
+                      const AssetImage('assets/images/english_hero.jpg'),
+                  image: NetworkImage(_englishTopic.imageUrl),
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
             Column(
@@ -48,7 +51,7 @@ class EnglishTopicItemView extends StatelessWidget {
                 SizedBox(
                   width: MediaQuery.of(context).size.width * 0.7,
                   child: Padding(
-                    padding: const EdgeInsets.fromLTRB(10, 10, 0, 0),
+                    padding: const EdgeInsets.fromLTRB(10, 5, 0, 5),
                     child: Text(
                       _englishTopic.descriptionEn,
                       style: const TextStyle(

@@ -15,7 +15,7 @@ class EnglishTopicDAO {
     if (_db == null) return [];
 
     List<Map<String, dynamic>> maps = await _db!
-        .rawQuery('SELECT * from ${EnglishDatabase.english_topic_table_name}');
+        .rawQuery('SELECT * from ${EnglishDatabase.english_topics_table_name}');
 
     return maps.isNotEmpty
         ? maps.map((e) => EnglishTopicEntity.fromJson(e)).toList()
@@ -27,7 +27,7 @@ class EnglishTopicDAO {
     final batch = _db!.batch();
 
     for (var topic in topics) {
-      _db!.insert(EnglishDatabase.english_topic_table_name, topic.toMap(),
+      _db!.insert(EnglishDatabase.english_topics_table_name, topic.toMap(),
           conflictAlgorithm: ConflictAlgorithm.replace);
     }
   }
