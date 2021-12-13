@@ -1,23 +1,40 @@
 import 'package:english_hero/data/common/model/english/topic_entity.dart';
+import 'package:english_hero/data/common/model/english/vocabulary.dart';
 import 'package:english_hero/data/local/dao/topic_dao.dart';
+import 'package:english_hero/data/local/dao/vocabularies_dao.dart';
+import 'package:english_hero/ui/authentication/auth_screen.dart';
 
 abstract class EnglishLocalDataSource {
   Future<List<EnglishTopicEntity>> getTopics();
   Future<void> saveTopics(List<EnglishTopicEntity> topics);
+
+  Future<List<VocabularyEntity>> getVocabulariesBytopic(int topicId);
+  Future<void> saveVocabularies(List<VocabularyEntity> vocabularies);
 }
 
 class EnglishLocalDataSourceImpl extends EnglishLocalDataSource {
-  EnglishTopicDAO _englishTopicDAO;
+  EnglishTopicDAO _topicDAO;
+  EnglishVocabulariesDAO _vocabulariesDAO;
 
-  EnglishLocalDataSourceImpl(this._englishTopicDAO);
+  EnglishLocalDataSourceImpl(this._topicDAO, this._vocabulariesDAO);
 
   @override
   Future<List<EnglishTopicEntity>> getTopics() async {
-    return await _englishTopicDAO.getTopics();
+    return await _topicDAO.getTopics();
   }
 
   @override
   Future<void> saveTopics(List<EnglishTopicEntity> topics) async {
-    return await _englishTopicDAO.insert(topics);
+    return await _topicDAO.insert(topics);
+  }
+
+  @override
+  Future<List<VocabularyEntity>> getVocabulariesBytopic(int topicId) async {
+    return await _vocabulariesDAO.getVocabulariesByTopic(topicId);
+  }
+
+  @override
+  Future<void> saveVocabularies(List<VocabularyEntity> vocabularies) async {
+    return await _vocabulariesDAO.insert(vocabularies);
   }
 }

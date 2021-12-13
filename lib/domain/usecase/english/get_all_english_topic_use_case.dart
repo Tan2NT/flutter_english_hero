@@ -1,12 +1,12 @@
 import 'package:english_hero/domain/model/english/topic.dart';
-import 'package:english_hero/domain/repository/english/english_topic_repository.dart';
+import 'package:english_hero/domain/repository/english/english_repository.dart';
 
 class GetAllTopicsUseCase {
-  EnglishTopicRepository _englishTopicRepo;
+  final EnglishRepository _englishRepo;
 
-  GetAllTopicsUseCase(this._englishTopicRepo);
+  GetAllTopicsUseCase(this._englishRepo);
 
   Future<List<EnglishTopic>> execute() async {
-    return await _englishTopicRepo.getAllTopics();
+    return await _englishRepo.getAllTopics();
   }
 }

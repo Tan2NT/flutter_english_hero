@@ -3,7 +3,8 @@ import 'package:path/path.dart';
 
 class EnglishDatabase {
   static const String database_name = 'english_database.db';
-  static const String english_topic_table_name = 'english_topics';
+  static const String english_topics_table_name = 'english_topics';
+  static const String english_vocabularies_table_name = 'english_vocabularies';
 
   static Database? _db;
 
@@ -15,7 +16,10 @@ class EnglishDatabase {
     _db ??= await openDatabase(path, version: 2,
         onCreate: (Database db, int version) async {
       await db.execute(
-          'CREATE TABLE $english_topic_table_name (id INTERGER PRIMARY KEY, name TEXT, description_en TEXT, image_url TEXT)');
+          'CREATE TABLE $english_topics_table_name (id INTERGER PRIMARY KEY, name TEXT, description_en TEXT, image_url TEXT)');
+
+      await db.execute(
+          'CREATE TABLE $english_vocabularies_table_name (word INTERGER PRIMARY KEY, meaning_vi TEXT)');
     });
 
     return _db;

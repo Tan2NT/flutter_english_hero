@@ -1,4 +1,5 @@
 import 'package:english_hero/data/local/dao/topic_dao.dart';
+import 'package:english_hero/data/local/dao/vocabularies_dao.dart';
 import 'package:english_hero/data/local/english_database.dart';
 import 'package:english_hero/data/local/english_local_data_source.dart';
 import 'package:english_hero/data/remote/api/english/english_api_service.dart';
@@ -18,7 +19,8 @@ class DataSourceModules extends DIModule {
     getIt.registerSingleton<EnglishRemoteDataSource>(
         EnglishRemoteDataSourceImpl(getIt.get<EnglishApiService>()));
     getIt.registerSingleton<EnglishTopicDAO>(EnglishTopicDAO());
-    getIt.registerSingleton<EnglishLocalDataSource>(
-        EnglishLocalDataSourceImpl(getIt.get<EnglishTopicDAO>()));
+    getIt.registerSingleton<EnglishVocabulariesDAO>(EnglishVocabulariesDAO());
+    getIt.registerSingleton<EnglishLocalDataSource>(EnglishLocalDataSourceImpl(
+        getIt.get<EnglishTopicDAO>(), getIt.get<EnglishVocabulariesDAO>()));
   }
 }
