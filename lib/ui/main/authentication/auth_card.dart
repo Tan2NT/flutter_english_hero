@@ -1,10 +1,10 @@
 import 'package:english_hero/domain/model/auth_mode.dart';
-import 'package:english_hero/ui/english/topic/list/english_topics_screen.dart';
+import 'package:english_hero/ui/main/english/topic/list/english_topics_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:flutter/services.dart';
-import '../../presentation/provider/user_provider.dart';
+import '../../../presentation/provider/user_provider.dart';
 
 class AuthCard extends StatefulWidget {
   const AuthCard({

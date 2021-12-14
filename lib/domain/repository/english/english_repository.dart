@@ -4,7 +4,6 @@ import 'package:english_hero/data/local/english_local_data_source.dart';
 import 'package:english_hero/domain/mapper/english/english_topics_mapper.dart';
 import 'package:english_hero/domain/mapper/english/english_vocabulary_mapper.dart';
 import 'package:english_hero/domain/model/english/vocabulary.dart';
-import 'package:english_hero/ui/authentication/auth_screen.dart';
 
 import '../../model/english/topic.dart';
 import '../../../data/remote/data_source/english_remote_data_source.dart';

@@ -1,6 +1,6 @@
 import 'package:english_hero/domain/model/english/topic.dart';
-import 'package:english_hero/ui/english/topic/details/english_topic_item_details_screen.dart';
-import 'package:english_hero/ui/english/topic/list/widgets/placehoder_image.dart';
+import 'package:english_hero/ui/main/english/topic/details/english_topic_item_details_screen.dart';
+import 'package:english_hero/ui/components/placehoder_image.dart';
 import 'package:flutter/material.dart';
 
 class EnglishTopicItemWidget extends StatelessWidget {

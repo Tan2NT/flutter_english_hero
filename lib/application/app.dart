@@ -1,17 +1,17 @@
 import 'package:english_hero/di/injection/injetion.dart';
 import 'package:english_hero/presentation/english/topic/details/english_topic_item_details_view_model.dart';
 import 'package:english_hero/presentation/english/topic/list/english_topics_view_model.dart';
-import 'package:english_hero/presentation/utils/shared_preference_util.dart';
-import 'package:english_hero/ui/english/topic/details/english_topic_item_details_screen.dart';
+import 'package:english_hero/ui/main/english/topic/details/english_topic_item_details_screen.dart';
+import 'package:english_hero/ui/main/english/topic/list/english_topics_screen.dart';
+import 'package:english_hero/ui/main/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 
 import '../presentation/provider/user_provider.dart';
 import '../ui/helpers/custom_route.dart';
-import '../ui/english/topic/list/english_topics_screen.dart';
-import '../ui/splash_screen.dart';
-import '../ui/authentication/auth_screen.dart';
+import '../ui/main/splash_screen.dart';
+import '../ui/main/authentication/auth_screen.dart';
 
 class Application extends StatelessWidget {
   const Application({Key? key}) : super(key: key);
@@ -42,14 +42,15 @@ class Application extends StatelessWidget {
                         authResultSnapshot.connectionState ==
                                 ConnectionState.waiting
                             ? const SplashScreen()
-                            : AuthScreen()),
+                            : const AuthScreen()),
             routes: {
               EnglishTopicsScreen.routeName: (ctx) =>
                   EnglishTopicsScreen(getIt.get<EnglishTopicsViewModel>()),
-              AuthScreen.routeName: (ctx) => AuthScreen(),
+              AuthScreen.routeName: (ctx) => const AuthScreen(),
               EnglishTopicItemDetailsScreen.routeName: (ctx) =>
                   EnglishTopicItemDetailsScreen(
-                      getIt.get<EnglishTopicItemDetailsViewModel>())
+                      getIt.get<EnglishTopicItemDetailsViewModel>()),
+              ProfileScreen.routeName: (ctx) => ProfileScreen()
             },
           ),
         ));
