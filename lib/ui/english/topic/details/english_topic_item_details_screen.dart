@@ -21,7 +21,7 @@ class EnglishTopicItemDetailsScreen extends StatelessWidget {
     return ScopedModel<EnglishTopicItemDetailsViewModel>(
       model: _viewModel,
       child: Scaffold(
-          appBar: MyAppBar(topic.name),
+          appBar: MyAppBar(context, topic.name, true),
           body: ScopedModelDescendant<EnglishTopicItemDetailsViewModel>(
               builder: (ctx, child, viewModel) {
             if (!_isFetched) {

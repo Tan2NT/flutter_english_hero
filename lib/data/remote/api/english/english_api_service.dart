@@ -39,6 +39,7 @@ class EnglishApiService {
     try {
       final response = await http.get(url);
       final extractedData = json.decode(response.body) as List<dynamic>;
+
       if (extractedData == null) {
         return [];
       }

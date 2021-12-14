@@ -13,15 +13,12 @@ class EnglishVocabulariesDAO extends EnglishDatabaseHelper {
           'SELECT * from ${EnglishDatabaseHelper.vocabularyTableName} WHERE topic_id = $topicId');
     } catch (error) {}
 
-    print('TDebug getVocabulariesByTopic 000 ${maps}');
-
     return maps.isNotEmpty
         ? maps.map((e) => VocabularyEntity.fromJson(e)).toList()
         : [];
   }
 
   Future<void> insert(List<VocabularyEntity> vocabularies) async {
-    print('TDebug insertVocabs  ${vocabularies.length}');
     await openDb();
     if (db == null) return;
     final batch = db!.batch();
@@ -30,6 +27,5 @@ class EnglishVocabulariesDAO extends EnglishDatabaseHelper {
           conflictAlgorithm: ConflictAlgorithm.replace);
     }
     await batch.commit();
-    print('TDebug insertVocabs done ');
   }
 }

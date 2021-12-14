@@ -13,19 +13,18 @@ class EnglishTopicsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScopedModel<EnglishTopicsViewModel>(
-        model: viewModel, child: topicsListWidget());
+        model: viewModel,
+        child: Scaffold(
+          appBar: MyAppBar(context, 'English Topics', false),
+          body: ScopedModelDescendant<EnglishTopicsViewModel>(
+              builder: (ctx, child, model) {
+            return ListView.builder(
+              itemBuilder: (ctx, index) {
+                return EnglishTopicItemWidget(viewModel.englisTopics[index]);
+              },
+              itemCount: viewModel.englisTopics.length,
+            );
+          }),
+        ));
   }
-
-  Widget topicsListWidget() => Scaffold(
-        appBar: MyAppBar('English Topics'),
-        body: ScopedModelDescendant<EnglishTopicsViewModel>(
-            builder: (ctx, child, model) {
-          return ListView.builder(
-            itemBuilder: (ctx, index) {
-              return EnglishTopicItemWidget(viewModel.englisTopics[index]);
-            },
-            itemCount: viewModel.englisTopics.length,
-          );
-        }),
-      );
 }

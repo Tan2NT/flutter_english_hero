@@ -51,11 +51,8 @@ class EnglishRepositoryimpl extends EnglishRepository {
   @override
   Future<List<Vocabulary>> fetchVocabulariesByTopic(
       int topicId, String authToken) async {
-    print('TDebug fetchVocabulariesByTopic: ${topicId}');
     final fetchedVocabularies =
         await _remoteDataSource.fetchVocabulariesByTopic(topicId, authToken);
-    print(
-        'TDebug fetchVocabulariesByTopic: response ${fetchedVocabularies.length}');
     _LocalDataSource.saveVocabularies(fetchedVocabularies);
 
     final vocabularies = fetchedVocabularies
@@ -67,13 +64,11 @@ class EnglishRepositoryimpl extends EnglishRepository {
 
   @override
   Future<List<Vocabulary>> getVocabulariesByTopicId(int topicId) async {
-    print('TDebug getVocabulariesByTopicId: ${topicId}');
     final vocabularies =
         (await _LocalDataSource.getVocabulariesBytopic(topicId))
             .map((vocabEntity) =>
                 EnglishVocabularyMapper().mapFromEntity(vocabEntity))
             .toList();
-    print('TDebug getVocabulariesByTopicId: return ${vocabularies.length}');
     return vocabularies;
   }
 
