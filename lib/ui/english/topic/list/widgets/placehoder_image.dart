@@ -17,13 +17,16 @@ class _PlacehoderImageState extends State<PlacehoderImage> {
   @override
   void initState() {
     super.initState();
+    checkInternetConnection();
   }
 
   void checkInternetConnection() async {
     final isConnected = await ConnectivityUtil.hasInternetConnection();
-    setState(() {
-      _hasInternetConnection = isConnected;
-    });
+    if (_hasInternetConnection != isConnected) {
+      setState(() {
+        _hasInternetConnection = isConnected;
+      });
+    }
   }
 
   @override
@@ -32,6 +35,6 @@ class _PlacehoderImageState extends State<PlacehoderImage> {
         ? FadeInImage(
             placeholder: AssetImage(widget._localAsset),
             image: NetworkImage(widget._remoteAssert))
-        : Image.asset('widget._localAsset');
+        : Image.asset(widget._localAsset);
   }
 }

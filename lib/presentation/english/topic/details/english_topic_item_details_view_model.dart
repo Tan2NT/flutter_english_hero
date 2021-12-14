@@ -29,7 +29,7 @@ class EnglishTopicItemDetailsViewModel extends Model {
     return fetchedVocabularies;
   }
 
-  Future<List<Vocabulary>> getAllTVocabulariesByTopic(int topicId) async {
+  Future<List<Vocabulary>> getAllVocabulariesByTopic(int topicId) async {
     final savedVocabularies =
         await _getVocabulariesByTopicUseCase.execute(topicId);
     updateVocabularies(savedVocabularies);
@@ -38,7 +38,7 @@ class EnglishTopicItemDetailsViewModel extends Model {
 
   void updateVocabularies(List<Vocabulary> newVocabularies) {
     if (newVocabularies.isNotEmpty &&
-        listEquals(newVocabularies, _vocabularies)) {
+        !listEquals(newVocabularies, _vocabularies)) {
       _vocabularies.clear();
       _vocabularies = newVocabularies;
       notifyListeners();

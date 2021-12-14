@@ -20,8 +20,6 @@ class EnglishTopicsScreen extends StatelessWidget {
         appBar: MyAppBar('English Topics'),
         body: ScopedModelDescendant<EnglishTopicsViewModel>(
             builder: (ctx, child, model) {
-          viewModel.fetchAllTopics();
-          viewModel.getAllTopics();
           return ListView.builder(
             itemBuilder: (ctx, index) {
               return EnglishTopicItemWidget(viewModel.englisTopics[index]);

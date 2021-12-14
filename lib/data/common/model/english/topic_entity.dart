@@ -10,12 +10,12 @@ class EnglishTopicEntity {
       required this.descriptionEn,
       required this.imageUrl});
 
-  factory EnglishTopicEntity.fromJson(Map<String, dynamic> topicData) {
+  factory EnglishTopicEntity.fromJson(Map<dynamic, dynamic> topicData) {
     return EnglishTopicEntity(
-        id: topicData['id'],
-        name: topicData['name'],
-        descriptionEn: topicData['description_en'],
-        imageUrl: topicData['image_url']);
+        id: topicData['id'] as int,
+        name: topicData['name'] as String,
+        descriptionEn: topicData['description_en'] as String,
+        imageUrl: topicData['image_url'] as String);
   }
 
   Map<String, Object> toMap() {
@@ -25,5 +25,13 @@ class EnglishTopicEntity {
       'description_en': descriptionEn,
       'image_url': imageUrl
     };
+  }
+
+  factory EnglishTopicEntity.fromMap(Map<dynamic, dynamic> map) {
+    return EnglishTopicEntity(
+        id: map['id'] as int,
+        name: map['name'] as String,
+        descriptionEn: map['description_en'] as String,
+        imageUrl: map['image_url'] as String);
   }
 }

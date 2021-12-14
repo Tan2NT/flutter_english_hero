@@ -2,7 +2,6 @@ import 'package:english_hero/data/common/model/english/topic_entity.dart';
 import 'package:english_hero/data/common/model/english/vocabulary.dart';
 import 'package:english_hero/data/local/dao/topic_dao.dart';
 import 'package:english_hero/data/local/dao/vocabularies_dao.dart';
-import 'package:english_hero/ui/authentication/auth_screen.dart';
 
 abstract class EnglishLocalDataSource {
   Future<List<EnglishTopicEntity>> getTopics();

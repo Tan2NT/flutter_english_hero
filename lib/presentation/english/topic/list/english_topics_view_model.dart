@@ -13,7 +13,10 @@ class EnglishTopicsViewModel extends Model {
   final GetAllTopicsUseCase _getAllTopicsUseCase;
 
   EnglishTopicsViewModel(
-      this._fetchAllTopicsUseCase, this._getAllTopicsUseCase);
+      this._fetchAllTopicsUseCase, this._getAllTopicsUseCase) {
+    fetchAllTopics();
+    getAllTopics();
+  }
 
   Future<List<EnglishTopic>> fetchAllTopics() async {
     final fetchedTopics = await _fetchAllTopicsUseCase

@@ -16,24 +16,27 @@ class EnglishTopicItemDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final topic = ModalRoute.of(context)!.settings.arguments as EnglishTopic;
+    bool _isFetched = false;
 
     return ScopedModel<EnglishTopicItemDetailsViewModel>(
       model: _viewModel,
-      child: vocabulariesWidget(topic),
+      child: Scaffold(
+          appBar: MyAppBar(topic.name),
+          body: ScopedModelDescendant<EnglishTopicItemDetailsViewModel>(
+              builder: (ctx, child, viewModel) {
+            if (!_isFetched) {
+              viewModel.fetchVocabulariesByTopics(topic.id);
+              viewModel.getAllVocabulariesByTopic(topic.id);
+              _isFetched = true;
+            }
+            return ListView.builder(
+              itemBuilder: (ctx, index) {
+                return EnglishTopicItemDetailsWidget(
+                    viewModel.vocabularies[index]);
+              },
+              itemCount: viewModel.vocabularies.length,
+            );
+          })),
     );
   }
-
-  Widget vocabulariesWidget(EnglishTopic topic) => Scaffold(
-      appBar: MyAppBar(topic.name),
-      body: ScopedModelDescendant<EnglishTopicItemDetailsViewModel>(
-          builder: (ctx, child, viewModel) {
-        viewModel.fetchVocabulariesByTopics(topic.id);
-        viewModel.getAllTVocabulariesByTopic(topic.id);
-        return ListView.builder(
-          itemBuilder: (ctx, index) {
-            return EnglishTopicItemDetailsWidget(viewModel.vocabularies[index]);
-          },
-          itemCount: viewModel.vocabularies.length,
-        );
-      }));
 }

@@ -21,4 +21,11 @@ class VocabularyEntity {
       'topic_id': topicId,
     };
   }
+
+  factory VocabularyEntity.fromMap(Map<dynamic, dynamic> map) {
+    return VocabularyEntity(
+        word: map['word'] as String,
+        meaningVi: map['meaning_vi'] as String,
+        topicId: map['topic_id'] as int);
+  }
 }
