@@ -1,8 +1,10 @@
 import 'package:english_hero/di/injection/injetion.dart';
 import 'package:english_hero/presentation/english/topic/details/english_topic_item_details_view_model.dart';
 import 'package:english_hero/presentation/english/topic/list/english_topics_view_model.dart';
+import 'package:english_hero/presentation/english/topic/test/english_topic_test_view_model.dart';
 import 'package:english_hero/ui/main/english/topic/details/english_topic_item_details_screen.dart';
 import 'package:english_hero/ui/main/english/topic/list/english_topics_screen.dart';
+import 'package:english_hero/ui/main/english/topic/test/english_topic_test_screen.dart';
 import 'package:english_hero/ui/main/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -50,7 +52,9 @@ class Application extends StatelessWidget {
               EnglishTopicItemDetailsScreen.routeName: (ctx) =>
                   EnglishTopicItemDetailsScreen(
                       getIt.get<EnglishTopicItemDetailsViewModel>()),
-              ProfileScreen.routeName: (ctx) => ProfileScreen()
+              ProfileScreen.routeName: (ctx) => ProfileScreen(),
+              EnglishTopicTestScreen.routeName: (ctx) =>
+                  EnglishTopicTestScreen(getIt.get<EnglishTopicTestViewModel>())
             },
           ),
         ));

@@ -1,6 +1,7 @@
 import 'package:english_hero/domain/model/english/topic.dart';
 import 'package:english_hero/ui/main/english/topic/details/english_topic_item_details_screen.dart';
 import 'package:english_hero/ui/components/placehoder_image.dart';
+import 'package:english_hero/ui/main/english/topic/test/english_topic_test_screen.dart';
 import 'package:flutter/material.dart';
 
 class EnglishTopicItemWidget extends StatelessWidget {
@@ -31,7 +32,7 @@ class EnglishTopicItemWidget extends StatelessWidget {
                   value: '0'),
               PopupMenuItem<String>(
                   onTap: () => Future(() => Navigator.of(context).pushNamed(
-                      EnglishTopicItemDetailsScreen.routeName,
+                      EnglishTopicTestScreen.routeName,
                       arguments: _englishTopic)),
                   child: const Text('Test',
                       style: TextStyle(
@@ -64,25 +65,28 @@ class EnglishTopicItemWidget extends StatelessWidget {
                 children: <Widget>[
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.68,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          _englishTopic.name,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.deepOrange,
-                            fontSize: 24,
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(10, 5, 0, 5),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            _englishTopic.name,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.deepOrange,
+                              fontSize: 24,
+                            ),
                           ),
-                        ),
-                        Text(
-                          '${_englishTopic.vocabularyCount} vocabularies',
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 14,
-                          ),
-                        )
-                      ],
+                          Text(
+                            '${_englishTopic.vocabularyCount} vocabularies',
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14,
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                   SizedBox(

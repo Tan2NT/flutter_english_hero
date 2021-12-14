@@ -1,5 +1,3 @@
-import 'package:english_hero/domain/model/english/vocabulary.dart';
-
 class EnglishTopicEntity {
   int id;
   String name;

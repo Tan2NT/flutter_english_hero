@@ -4,6 +4,7 @@ import 'package:english_hero/domain/usecase/english/get_all_english_topic_use_ca
 import 'package:english_hero/domain/usecase/english/get_all_vocabularies_by_topic_use_case.dart';
 import 'package:english_hero/presentation/english/topic/details/english_topic_item_details_view_model.dart';
 import 'package:english_hero/presentation/english/topic/list/english_topics_view_model.dart';
+import 'package:english_hero/presentation/english/topic/test/english_topic_test_view_model.dart';
 
 import '../injection/injetion.dart';
 import '../modules/di_module.dart';
@@ -18,6 +19,9 @@ class ViewModelModule extends DIModule {
     getIt.registerFactory<EnglishTopicItemDetailsViewModel>(() =>
         EnglishTopicItemDetailsViewModel(
             getIt.get<FetchVocabulariesByTopicsUseCase>(),
+            getIt.get<GetAllVocabulariesByTopicUseCase>()));
+    getIt.registerSingleton<EnglishTopicTestViewModel>(
+        EnglishTopicTestViewModel(
             getIt.get<GetAllVocabulariesByTopicUseCase>()));
   }
 }
