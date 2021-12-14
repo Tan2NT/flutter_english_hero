@@ -73,11 +73,13 @@ class _AuthCardState extends State<AuthCard>
     });
     var userProvider = Provider.of<UserProvider>(context, listen: false);
     try {
-      await Provider.of<UserProvider>(context, listen: false).authenticate(
-          _authData['email'] as String,
-          _authData['password'] as String,
-          _authMode);
-      Navigator.of(context).pushReplacementNamed(EnglishTopicsScreen.routeName);
+      final isSuccess = await Provider.of<UserProvider>(context, listen: false)
+          .authenticate(_authData['email'] as String,
+              _authData['password'] as String, _authMode);
+      if (isSuccess) {
+        Navigator.of(context)
+            .pushReplacementNamed(EnglishTopicsScreen.routeName);
+      }
     } catch (error) {}
 
     if (userProvider.errorMessage.isNotEmpty) {
