@@ -28,7 +28,7 @@ class Application extends StatelessWidget {
             title: 'English Hero',
             theme: ThemeData(
                 primarySwatch: Colors.purple,
-                accentColor: Colors.deepOrange,
+                primaryColorDark: Colors.deepOrange,
                 fontFamily: 'Lato',
                 pageTransitionsTheme: PageTransitionsTheme(builders: {
                   TargetPlatform.android: CustomPageTransitionBuilder(),

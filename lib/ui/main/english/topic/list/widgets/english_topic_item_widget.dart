@@ -11,9 +11,33 @@ class EnglishTopicItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        Navigator.of(context).pushNamed(EnglishTopicItemDetailsScreen.routeName,
-            arguments: _englishTopic);
+      onTapDown: (TapDownDetails details) {
+        showMenu(
+            context: context,
+            position: RelativeRect.fromLTRB(
+              details.globalPosition.dx,
+              details.globalPosition.dy,
+              details.globalPosition.dx,
+              details.globalPosition.dy,
+            ),
+            items: [
+              PopupMenuItem<String>(
+                  onTap: () => Future(() => Navigator.of(context).pushNamed(
+                      EnglishTopicItemDetailsScreen.routeName,
+                      arguments: _englishTopic)),
+                  child: const Text('Learn',
+                      style: TextStyle(
+                          color: Colors.blue, fontWeight: FontWeight.bold)),
+                  value: '0'),
+              PopupMenuItem<String>(
+                  onTap: () => Future(() => Navigator.of(context).pushNamed(
+                      EnglishTopicItemDetailsScreen.routeName,
+                      arguments: _englishTopic)),
+                  child: const Text('Test',
+                      style: TextStyle(
+                          color: Colors.blue, fontWeight: FontWeight.bold)),
+                  value: '1'),
+            ]);
       },
       child: SizedBox(
         width: MediaQuery.of(context).size.width * 0.94,
@@ -24,7 +48,7 @@ class EnglishTopicItemWidget extends StatelessWidget {
           color: Colors.white,
           elevation: 10,
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Container(
                 padding: const EdgeInsets.all(2.0),
@@ -37,32 +61,28 @@ class EnglishTopicItemWidget extends StatelessWidget {
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.68,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            _englishTopic.name,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.deepOrange,
-                              fontSize: 24,
-                            ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          _englishTopic.name,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.deepOrange,
+                            fontSize: 24,
                           ),
-                          Text(
-                            '${_englishTopic.vocabularyCount} vocabularies',
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 14,
-                            ),
-                          )
-                        ],
-                      ),
+                        ),
+                        Text(
+                          '${_englishTopic.vocabularyCount} vocabularies',
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                          ),
+                        )
+                      ],
                     ),
                   ),
                   SizedBox(
