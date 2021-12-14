@@ -22,4 +22,11 @@ class EnglishTopicDAO extends EnglishDatabaseHelper {
     if (maps.isEmpty) return [];
     return maps.map((topic) => EnglishTopicEntity.fromMap(topic)).toList();
   }
+
+  Future updatevocabularyCountOfTopic(int topicId, int vocabularyCount) async {
+    await openDb();
+    db!.rawUpdate(
+        'UPDATE ${EnglishDatabaseHelper.topicTableName} SET vocabulary_count = $vocabularyCount WHERE id = $topicId');
+    return;
+  }
 }

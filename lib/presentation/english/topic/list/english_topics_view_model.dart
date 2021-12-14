@@ -24,12 +24,21 @@ class EnglishTopicsViewModel extends Model {
     final token = PreferenceUtils.getString(Constants.USER_TOKEN_KEY);
     final fetchedTopics = await _fetchAllTopicsUseCase.execute(token);
     updateTopics(fetchedTopics);
-    if (fetchedTopics.isNotEmpty) {
-      for (var topic in fetchedTopics) {
-        _fetchVocabulariesByTopicsUseCase.execute(topic.id, token);
+    fetchVocabulariesOfTopics(fetchedTopics, token);
+    return fetchedTopics;
+  }
+
+  Future fetchVocabulariesOfTopics(
+      List<EnglishTopic> topics, String token) async {
+    if (topics.isNotEmpty) {
+      for (var topic in topics) {
+        final vocabs =
+            await _fetchVocabulariesByTopicsUseCase.execute(topic.id, token);
+        if (vocabs.isNotEmpty) {
+          updateVocabularyCountOfTopic(vocabs[0].topicId, vocabs.length);
+        }
       }
     }
-    return fetchedTopics;
   }
 
   Future<List<EnglishTopic>> getAllTopics() async {
@@ -43,6 +52,15 @@ class EnglishTopicsViewModel extends Model {
       englisTopics.clear();
       englisTopics = newTopics;
       notifyListeners();
+    }
+  }
+
+  void updateVocabularyCountOfTopic(int topicId, vocabularyCount) {
+    for (var topic in englisTopics) {
+      if (topic.id == topicId) {
+        topic.vocabularyCount = vocabularyCount;
+        notifyListeners();
+      }
     }
   }
 }

@@ -14,7 +14,7 @@ class EnglishVocabulariesDAO extends EnglishDatabaseHelper {
     } catch (error) {}
 
     return maps.isNotEmpty
-        ? maps.map((e) => VocabularyEntity.fromJson(e)).toList()
+        ? maps.map((e) => VocabularyEntity.fromMap(e)).toList()
         : [];
   }
 

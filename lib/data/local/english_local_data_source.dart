@@ -34,6 +34,10 @@ class EnglishLocalDataSourceImpl extends EnglishLocalDataSource {
 
   @override
   Future<void> saveVocabularies(List<VocabularyEntity> vocabularies) async {
+    if (vocabularies.isNotEmpty) {
+      _topicDAO.updatevocabularyCountOfTopic(
+          vocabularies[0].topicId, vocabularies.length);
+    }
     return await _vocabulariesDAO.insert(vocabularies);
   }
 }

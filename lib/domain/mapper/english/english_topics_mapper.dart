@@ -9,7 +9,8 @@ class EnglishToPicMapper implements Mapper<EnglishTopicEntity, EnglishTopic> {
         id: topicEntity.id,
         name: topicEntity.name,
         descriptionEn: topicEntity.descriptionEn,
-        imageUrl: topicEntity.imageUrl);
+        imageUrl: topicEntity.imageUrl,
+        vocabularyCount: topicEntity.vocabularyCount);
   }
 
   @override
@@ -18,6 +19,7 @@ class EnglishToPicMapper implements Mapper<EnglishTopicEntity, EnglishTopic> {
         id: topic.id,
         name: topic.name,
         descriptionEn: topic.descriptionEn,
-        imageUrl: topic.imageUrl);
+        imageUrl: topic.imageUrl,
+        vocabularyCount: topic.vocabularyCount);
   }
 }

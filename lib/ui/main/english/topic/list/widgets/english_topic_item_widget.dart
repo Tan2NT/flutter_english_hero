@@ -24,7 +24,7 @@ class EnglishTopicItemWidget extends StatelessWidget {
           color: Colors.white,
           elevation: 10,
           child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
               Container(
                 padding: const EdgeInsets.all(2.0),
@@ -37,17 +37,31 @@ class EnglishTopicItemWidget extends StatelessWidget {
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
                   SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.5,
+                    width: MediaQuery.of(context).size.width * 0.68,
                     child: Padding(
-                      padding: const EdgeInsets.fromLTRB(10, 10, 0, 0),
-                      child: Text(
-                        _englishTopic.name,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 24,
-                        ),
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            _englishTopic.name,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.deepOrange,
+                              fontSize: 24,
+                            ),
+                          ),
+                          Text(
+                            '${_englishTopic.vocabularyCount} vocabularies',
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14,
+                            ),
+                          )
+                        ],
                       ),
                     ),
                   ),
