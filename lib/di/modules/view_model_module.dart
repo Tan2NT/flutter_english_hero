@@ -12,7 +12,9 @@ class ViewModelModule extends DIModule {
   @override
   Future<void> provides() async {
     getIt.registerFactory<EnglishTopicsViewModel>(() => EnglishTopicsViewModel(
-        getIt.get<FetchAllTopicsUseCase>(), getIt.get<GetAllTopicsUseCase>()));
+        getIt.get<FetchAllTopicsUseCase>(),
+        getIt.get<GetAllTopicsUseCase>(),
+        getIt.get<FetchVocabulariesByTopicsUseCase>()));
     getIt.registerFactory<EnglishTopicItemDetailsViewModel>(() =>
         EnglishTopicItemDetailsViewModel(
             getIt.get<FetchVocabulariesByTopicsUseCase>(),

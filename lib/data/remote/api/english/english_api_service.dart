@@ -1,3 +1,4 @@
+import 'package:english_hero/core/exception/http_exception.dart';
 import 'package:english_hero/data/common/model/english/vocabulary.dart';
 
 import '../../../common/model/english/topic_entity.dart';
@@ -49,7 +50,7 @@ class EnglishApiService {
       });
       return vocabularies;
     } catch (error) {
-      rethrow;
+      return [];
     }
   }
 }

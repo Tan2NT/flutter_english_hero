@@ -1,5 +1,6 @@
 import 'package:english_hero/domain/model/english/topic.dart';
 import 'package:english_hero/domain/usecase/english/fetch_all_topics_use_case.dart';
+import 'package:english_hero/domain/usecase/english/fetch_vocabularies_by_topic_use_case.dart';
 import 'package:english_hero/domain/usecase/english/get_all_english_topic_use_case.dart';
 import 'package:english_hero/presentation/utils/constants.dart';
 import 'package:english_hero/presentation/utils/shared_preference_util.dart';
@@ -11,17 +12,23 @@ class EnglishTopicsViewModel extends Model {
   List<EnglishTopic> englisTopics = [];
   final FetchAllTopicsUseCase _fetchAllTopicsUseCase;
   final GetAllTopicsUseCase _getAllTopicsUseCase;
+  final FetchVocabulariesByTopicsUseCase _fetchVocabulariesByTopicsUseCase;
 
-  EnglishTopicsViewModel(
-      this._fetchAllTopicsUseCase, this._getAllTopicsUseCase) {
+  EnglishTopicsViewModel(this._fetchAllTopicsUseCase, this._getAllTopicsUseCase,
+      this._fetchVocabulariesByTopicsUseCase) {
     fetchAllTopics();
     getAllTopics();
   }
 
   Future<List<EnglishTopic>> fetchAllTopics() async {
-    final fetchedTopics = await _fetchAllTopicsUseCase
-        .execute(PreferenceUtils.getString(Constants.USER_TOKEN_KEY));
+    final token = PreferenceUtils.getString(Constants.USER_TOKEN_KEY);
+    final fetchedTopics = await _fetchAllTopicsUseCase.execute(token);
     updateTopics(fetchedTopics);
+    if (fetchedTopics.isNotEmpty) {
+      for (var topic in fetchedTopics) {
+        _fetchVocabulariesByTopicsUseCase.execute(topic.id, token);
+      }
+    }
     return fetchedTopics;
   }
 
