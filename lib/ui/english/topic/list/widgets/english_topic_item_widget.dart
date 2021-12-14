@@ -1,5 +1,6 @@
 import 'package:english_hero/domain/model/english/topic.dart';
 import 'package:english_hero/ui/english/topic/details/english_topic_item_details_screen.dart';
+import 'package:english_hero/ui/english/topic/list/widgets/placehoder_image.dart';
 import 'package:flutter/material.dart';
 
 class EnglishTopicItemWidget extends StatelessWidget {
@@ -30,12 +31,8 @@ class EnglishTopicItemWidget extends StatelessWidget {
                 width: MediaQuery.of(context).size.width * 0.28,
                 height: MediaQuery.of(context).size.width * 0.28,
                 child: Center(
-                  child: FadeInImage(
-                    placeholder:
-                        const AssetImage('assets/images/english_hero.jpg'),
-                    image: NetworkImage(_englishTopic.imageUrl),
-                    fit: BoxFit.cover,
-                  ),
+                  child: PlacehoderImage(
+                      'assets/images/english_hero.jpg', _englishTopic.imageUrl),
                 ),
               ),
               Column(

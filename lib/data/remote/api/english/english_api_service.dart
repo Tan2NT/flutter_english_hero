@@ -27,7 +27,8 @@ class EnglishApiService {
       });
       return topics;
     } catch (error) {
-      rethrow;
+      print(error.toString());
+      return [];
     }
   }
 
