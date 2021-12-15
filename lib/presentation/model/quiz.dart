@@ -4,7 +4,7 @@ class Quiz {
   List<Question> questions;
   int totalCorrectAnswer = 0;
 
-  Quiz(this.questions);
+  Quiz(this.questions, this.totalCorrectAnswer);
 
   bool hasChosenAll() {
     if (questions.isEmpty) return false;

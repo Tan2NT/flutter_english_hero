@@ -10,28 +10,13 @@ class EnglishTopicTestViewModel extends Model {
 
   EnglishTopicTestViewModel(this.getVocabulariesUsecase);
 
-  Quiz quiz = Quiz([
-    // Question(
-    //     questionText: 'Dog',
-    //     choices: ['Cho', 'Meo', 'Ga', 'vit'],
-    //     correctChoice: 'Cho'),
-    // Question(
-    //     questionText: 'Cat',
-    //     choices: ['Cho', 'Meo', 'Ga', 'vit'],
-    //     correctChoice: 'Meo'),
-    // Question(
-    //     questionText: 'Chicken',
-    //     choices: ['Cho', 'Meo', 'Ga', 'vit'],
-    //     correctChoice: 'Ga'),
-    // Question(
-    //     questionText: 'Duck',
-    //     choices: ['Cho', 'Meo', 'Ga', 'vit'],
-    //     correctChoice: 'Vit'),
-  ]);
+  bool _isPopulatedQuiz = false;
+
+  Quiz quiz = Quiz([], 0);
 
   Future populateQuiz(int topicId) async {
     final vocabularies = await getVocabulariesUsecase.execute(topicId);
-    quiz.reset();
+    Quiz newQuiz = Quiz([], 0);
     List<String> words = [];
     List<String> meanings = [];
     for (var vocab in vocabularies) {
@@ -44,27 +29,33 @@ class EnglishTopicTestViewModel extends Model {
       if (selectWordAsQestion) {
         List<String> randomMeanings = List.from(meanings);
         randomMeanings.shuffle();
-        quiz.questions.add(Question(
+        newQuiz.questions.add(Question(
             questionText: words[i],
             choices: getRandomChoice(randomMeanings, meanings[i]),
             correctChoice: meanings[i]));
       } else {
         List<String> randomWords = List.from(words);
         randomWords.shuffle();
-        quiz.questions.add(Question(
+        newQuiz.questions.add(Question(
             questionText: meanings[i],
             choices: getRandomChoice(randomWords, words[i]),
             correctChoice: words[i]));
       }
     }
-    notifyListeners();
+
+    if (quiz.questions.length != newQuiz.questions.length) {
+      quiz = newQuiz;
+      notifyListeners();
+    }
   }
 
   List<String> getRandomChoice(List<String> choices, String correct) {
-    int end = choices.length < 4 ? choices.length : 3;
-    List<String> subChoice =
-        choices.where((ch) => ch != correct).toList().sublist(0, end) +
-            [correct];
+    int end = choices.length - 1;
+    List<String> subChoice = choices
+            .where((ch) => ch != correct)
+            .toList()
+            .sublist(0, end < 4 ? end : 4) +
+        [correct];
     subChoice.shuffle();
     return subChoice;
   }
@@ -77,7 +68,7 @@ class EnglishTopicTestViewModel extends Model {
     }
   }
 
-  void resetAnswers() {
+  Future resetAnswers() async {
     for (var question in quiz.questions) {
       question.userAnswer = '';
     }

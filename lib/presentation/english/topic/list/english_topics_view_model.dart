@@ -2,6 +2,7 @@ import 'package:english_hero/domain/model/english/topic.dart';
 import 'package:english_hero/domain/usecase/english/fetch_all_topics_use_case.dart';
 import 'package:english_hero/domain/usecase/english/fetch_vocabularies_by_topic_use_case.dart';
 import 'package:english_hero/domain/usecase/english/get_all_english_topic_use_case.dart';
+import 'package:english_hero/domain/usecase/english/get_all_vocabularies_by_topic_use_case.dart';
 import 'package:english_hero/presentation/utils/constants.dart';
 import 'package:english_hero/presentation/utils/shared_preference_util.dart';
 import 'package:flutter/foundation.dart';
@@ -13,11 +14,15 @@ class EnglishTopicsViewModel extends Model {
   final FetchAllTopicsUseCase _fetchAllTopicsUseCase;
   final GetAllTopicsUseCase _getAllTopicsUseCase;
   final FetchVocabulariesByTopicsUseCase _fetchVocabulariesByTopicsUseCase;
+  final GetAllVocabulariesByTopicUseCase _getAllVocabulariesByTopicUseCase;
 
-  EnglishTopicsViewModel(this._fetchAllTopicsUseCase, this._getAllTopicsUseCase,
-      this._fetchVocabulariesByTopicsUseCase) {
-    fetchAllTopics();
+  EnglishTopicsViewModel(
+      this._fetchAllTopicsUseCase,
+      this._getAllTopicsUseCase,
+      this._fetchVocabulariesByTopicsUseCase,
+      this._getAllVocabulariesByTopicUseCase) {
     getAllTopics();
+    fetchAllTopics();
   }
 
   Future<List<EnglishTopic>> fetchAllTopics() async {
@@ -26,6 +31,27 @@ class EnglishTopicsViewModel extends Model {
     updateTopics(fetchedTopics);
     fetchVocabulariesOfTopics(fetchedTopics, token);
     return fetchedTopics;
+  }
+
+  Future<List<EnglishTopic>> getAllTopics() async {
+    final savedTopics = await _getAllTopicsUseCase.execute();
+    updateTopics(savedTopics);
+    for (var topic in savedTopics) {
+      final vocabsOfTopic =
+          await _getAllVocabulariesByTopicUseCase.execute(topic.id);
+      topic.vocabularyCount = vocabsOfTopic.length;
+    }
+    notifyListeners();
+    return savedTopics;
+  }
+
+  void updateTopics(List<EnglishTopic> newTopics) {
+    if (newTopics.isNotEmpty &&
+        !newTopics.isListEqualIgnoreVocabularyCount(englisTopics)) {
+      englisTopics.clear();
+      englisTopics = newTopics;
+      notifyListeners();
+    }
   }
 
   Future fetchVocabulariesOfTopics(
@@ -41,23 +67,9 @@ class EnglishTopicsViewModel extends Model {
     }
   }
 
-  Future<List<EnglishTopic>> getAllTopics() async {
-    final savedTopics = await _getAllTopicsUseCase.execute();
-    updateTopics(savedTopics);
-    return savedTopics;
-  }
-
-  void updateTopics(List<EnglishTopic> newTopics) {
-    if (newTopics.isNotEmpty && !listEquals(newTopics, englisTopics)) {
-      englisTopics.clear();
-      englisTopics = newTopics;
-      notifyListeners();
-    }
-  }
-
   void updateVocabularyCountOfTopic(int topicId, vocabularyCount) {
     for (var topic in englisTopics) {
-      if (topic.id == topicId) {
+      if (topic.id == topicId && topic.vocabularyCount != vocabularyCount) {
         topic.vocabularyCount = vocabularyCount;
         notifyListeners();
       }

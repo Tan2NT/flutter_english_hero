@@ -15,7 +15,8 @@ class ViewModelModule extends DIModule {
     getIt.registerFactory<EnglishTopicsViewModel>(() => EnglishTopicsViewModel(
         getIt.get<FetchAllTopicsUseCase>(),
         getIt.get<GetAllTopicsUseCase>(),
-        getIt.get<FetchVocabulariesByTopicsUseCase>()));
+        getIt.get<FetchVocabulariesByTopicsUseCase>(),
+        getIt.get<GetAllVocabulariesByTopicUseCase>()));
     getIt.registerFactory<EnglishTopicItemDetailsViewModel>(() =>
         EnglishTopicItemDetailsViewModel(
             getIt.get<FetchVocabulariesByTopicsUseCase>(),

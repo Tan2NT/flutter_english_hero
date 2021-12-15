@@ -25,9 +25,23 @@ class _QuizState extends State<QuizView> {
       padding: const EdgeInsets.all(8.0),
       child: Column(
         children: [
-          Text(
-            '${widget.question}',
-            style: Theme.of(context).textTheme.headline5,
+          Padding(
+            padding:
+                EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.30),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(
+                  '${widget.index}.  ',
+                  style: Theme.of(context).textTheme.headline5,
+                ),
+                Text('${widget.question}',
+                    style: const TextStyle(
+                      color: Colors.blueAccent,
+                      fontSize: 26,
+                    ))
+              ],
+            ),
           ),
           Column(
             children: widget.choices.map((item) {

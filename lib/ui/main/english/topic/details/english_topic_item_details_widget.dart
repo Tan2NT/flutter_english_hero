@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 
 class EnglishTopicItemDetailsWidget extends StatefulWidget {
   final Vocabulary _vocabulary;
+  final int _index;
 
-  EnglishTopicItemDetailsWidget(this._vocabulary);
+  EnglishTopicItemDetailsWidget(this._vocabulary, this._index);
 
   @override
   _EnglishTopicItemDetailsWidgetState createState() =>
@@ -37,6 +38,17 @@ class _EnglishTopicItemDetailsWidgetState
           leading: CircleAvatar(
             backgroundColor: _bgColor,
             radius: 30,
+            child: Padding(
+                padding: EdgeInsets.all(10),
+                child: FittedBox(
+                  child: Text(
+                    '${widget._index}',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20),
+                  ),
+                )),
           ),
           title: Text(
             widget._vocabulary.word,

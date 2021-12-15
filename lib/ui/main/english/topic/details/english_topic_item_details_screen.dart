@@ -33,7 +33,7 @@ class EnglishTopicItemDetailsScreen extends StatelessWidget {
             return ListView.builder(
               itemBuilder: (ctx, index) {
                 return EnglishTopicItemDetailsWidget(
-                    viewModel.vocabularies[index]);
+                    viewModel.vocabularies[index], index + 1);
               },
               itemCount: viewModel.vocabularies.length,
             );

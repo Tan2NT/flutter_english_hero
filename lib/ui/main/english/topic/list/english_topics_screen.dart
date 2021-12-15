@@ -13,6 +13,7 @@ class EnglishTopicsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('TDebug EnglishTopic enter ------------- ${DateTime.now()}');
     return ScopedModel<EnglishTopicsViewModel>(
       model: viewModel,
       child: Scaffold(
