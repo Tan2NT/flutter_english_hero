@@ -1,5 +1,7 @@
 import 'package:english_hero/core/exception/http_exception.dart';
 import 'package:english_hero/data/common/model/english/vocabulary.dart';
+import 'package:english_hero/di/injection/injetion.dart';
+import 'package:english_hero/presentation/provider/user_provider.dart';
 
 import '../../../common/model/english/topic_entity.dart';
 
@@ -14,6 +16,9 @@ class EnglishApiService {
   final VOCABULARIES_SERVICE_NAME = "vocabularies";
 
   Future<List<EnglishTopicEntity>> fetchAllTopics(String authToken) async {
+    final userProvider = getIt.get<UserProvider>();
+    print(
+        'TDebug - is auth: ${userProvider.isAuth} - user token: ${userProvider.token} ');
     final url =
         Uri.parse('$BASE_URL/$TOPICS_SERVICE_NAME.json?auth=$authToken');
     try {
