@@ -21,6 +21,10 @@ class EnglishTopicsViewModel extends Model {
       this._getAllTopicsUseCase,
       this._fetchVocabulariesByTopicsUseCase,
       this._getAllVocabulariesByTopicUseCase) {
+    prepareData();
+  }
+
+  Future prepareData() async {
     getAllTopics();
     fetchAllTopics();
   }

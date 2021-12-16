@@ -11,10 +11,12 @@ class MyAppBar extends AppBar {
           leading: _canGoBack
               ? IconButton(
                   onPressed: () {
-                    Navigator.of(_context).pop();
+                    if (Navigator.of(_context).canPop()) {
+                      Navigator.of(_context).pop();
+                    }
                   },
                   icon: Icon(Icons.arrow_back_ios))
-              : Text(''),
+              : const Text(''),
           title: Center(
             child: Text(
               _title,
