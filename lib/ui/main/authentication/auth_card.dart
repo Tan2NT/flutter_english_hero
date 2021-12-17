@@ -1,4 +1,5 @@
 import 'package:english_hero/domain/model/auth_mode.dart';
+import 'package:english_hero/ui/components/message_dialog.dart';
 import 'package:english_hero/ui/main/english/topic/list/english_topics_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -50,20 +51,8 @@ class _AuthCardState extends State<AuthCard>
   void _showErrorDialog(String message) {
     showDialog(
         context: context,
-        builder: (ctx) => AlertDialog(
-              title: Text('An Error Occured!',
-                  style: Theme.of(context).textTheme.headline6),
-              content: Text(message),
-              actions: [
-                ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        textStyle: const TextStyle(fontSize: 20)),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: const Text('Okay'))
-              ],
-            ));
+        builder: (ctx) =>
+            MessageDialog('An Error Occured!', message, 'Okay', null));
   }
 
   Future<void> _submit() async {

@@ -16,6 +16,7 @@ class _ProfileScreenState extends BasePageScreenState<ProfileScreen>
     with BaseScreen {
   @override
   void initState() {
+    isBackButton(false);
     appBarTitle('Profile');
     super.initState();
   }
@@ -29,13 +30,13 @@ class _ProfileScreenState extends BasePageScreenState<ProfileScreen>
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             const CircleAvatar(
                 radius: 50,
                 backgroundImage: AssetImage('assets/images/english_hero.jpg')),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             Row(
@@ -60,6 +61,11 @@ class _ProfileScreenState extends BasePageScreenState<ProfileScreen>
         ),
       ),
     );
+  }
+
+  @override
+  void isBackButton(bool isBack) {
+    super.isBackButton(isBack);
   }
 
   @override

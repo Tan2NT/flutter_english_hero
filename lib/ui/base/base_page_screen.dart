@@ -3,6 +3,7 @@ import 'package:english_hero/core/exception/exception_model.dart';
 import 'package:english_hero/di/injection/injetion.dart';
 import 'package:english_hero/ui/components/app_drawer.dart';
 import 'package:english_hero/ui/components/app_top_bar.dart';
+import 'package:english_hero/ui/components/message_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 
@@ -68,19 +69,8 @@ mixin BaseScreen<Page extends BasePageScreen> on BasePageScreenState<Page> {
     Future.delayed(Duration.zero, () async {
       showDialog(
           context: context,
-          builder: (ctx) => AlertDialog(
-                title: const Text('An Error Occured!'),
-                content: Text(exception.toExceptionString()),
-                actions: [
-                  ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          textStyle: const TextStyle(fontSize: 20)),
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: const Text('Okay'))
-                ],
-              ));
+          builder: (ctx) => MessageDialog('An Error Occured!',
+              exception.toExceptionString(), 'Okay', null));
     });
   }
 
