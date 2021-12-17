@@ -72,7 +72,9 @@ mixin BaseScreen<Page extends BasePageScreen> on BasePageScreenState<Page> {
                 title: const Text('An Error Occured!'),
                 content: Text(exception.toExceptionString()),
                 actions: [
-                  FlatButton(
+                  ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          textStyle: const TextStyle(fontSize: 20)),
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
@@ -85,7 +87,7 @@ mixin BaseScreen<Page extends BasePageScreen> on BasePageScreenState<Page> {
   Widget appWithAppBarAndDrawer() {
     return Scaffold(
         appBar: MyAppBar(context, _appBarTitle, _canGoBack),
-        drawer: AppDrawer(),
+        drawer: const AppDrawer(),
         body: Container(
           child: body(),
           color: Colors.white,
@@ -113,7 +115,7 @@ mixin BaseScreen<Page extends BasePageScreen> on BasePageScreenState<Page> {
 
   Widget appWithoutAppBar() {
     return Scaffold(
-        drawer: AppDrawer(),
+        drawer: const AppDrawer(),
         body: Container(
           child: body(),
           color: Colors.white,

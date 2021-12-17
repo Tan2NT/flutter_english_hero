@@ -7,7 +7,8 @@ import 'package:flutter/material.dart';
 class EnglishTopicItemWidget extends StatelessWidget {
   final EnglishTopic _englishTopic;
 
-  EnglishTopicItemWidget(this._englishTopic);
+  const EnglishTopicItemWidget(this._englishTopic, {Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

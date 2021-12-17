@@ -52,7 +52,7 @@ class Application extends StatelessWidget {
               EnglishTopicItemDetailsScreen.routeName: (ctx) =>
                   EnglishTopicItemDetailsScreen(
                       getIt.get<EnglishTopicItemDetailsViewModel>()),
-              ProfileScreen.routeName: (ctx) => ProfileScreen(),
+              ProfileScreen.routeName: (ctx) => const ProfileScreen(),
               EnglishTopicTestScreen.routeName: (ctx) =>
                   EnglishTopicTestScreen(getIt.get<EnglishTopicTestViewModel>())
             },

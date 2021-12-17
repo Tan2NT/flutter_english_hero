@@ -25,8 +25,8 @@ class EnglishTopic {
 
 extension ListEnglishTopicExtension on List<EnglishTopic> {
   bool isListEqualIgnoreVocabularyCount(List<EnglishTopic> anotherList) {
-    if (length == 0 && anotherList.length == 0) return true;
-    if (length == 0 || anotherList.length == 0) return false;
+    if (length == 0 && anotherList.isEmpty) return true;
+    if (length == 0 || anotherList.isEmpty) return false;
     for (var i = 0; i < length; i++) {
       if (this[i].id != anotherList[i].id ||
           this[i].name != anotherList[i].name ||

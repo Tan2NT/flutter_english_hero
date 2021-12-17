@@ -4,7 +4,6 @@ import 'package:english_hero/domain/usecase/english/get_all_vocabularies_by_topi
 import 'package:english_hero/presentation/base/constants.dart';
 import 'package:english_hero/core/exception/utils/shared_preference_util.dart';
 import 'package:flutter/foundation.dart';
-// ignore: import_of_legacy_library_into_null_safe
 import 'package:scoped_model/scoped_model.dart';
 
 class EnglishTopicItemDetailsViewModel extends Model {
@@ -21,7 +20,7 @@ class EnglishTopicItemDetailsViewModel extends Model {
 
   Future<List<Vocabulary>> fetchVocabulariesByTopics(int topicId) async {
     final fetchedVocabularies = await _fetchAllVocabsUseCase.execute(
-        topicId, PreferenceUtils.getString(Constants.USER_TOKEN_KEY));
+        topicId, PreferenceUtils.getString(Constants.userTokenKey));
     updateVocabularies(fetchedVocabularies);
     return fetchedVocabularies;
   }

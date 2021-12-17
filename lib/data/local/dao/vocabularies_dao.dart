@@ -8,10 +8,8 @@ class EnglishVocabulariesDAO extends EnglishDatabaseHelper {
     if (db == null) return [];
     List<Map<String, dynamic>> maps = [];
 
-    try {
-      maps = await db!.rawQuery(
-          'SELECT * from ${EnglishDatabaseHelper.vocabularyTableName} WHERE topic_id = $topicId');
-    } catch (error) {}
+    maps = await db!.rawQuery(
+        'SELECT * from ${EnglishDatabaseHelper.vocabularyTableName} WHERE topic_id = $topicId');
 
     return maps.isNotEmpty
         ? maps.map((e) => VocabularyEntity.fromMap(e)).toList()
@@ -22,10 +20,12 @@ class EnglishVocabulariesDAO extends EnglishDatabaseHelper {
     await openDb();
     if (db == null) return;
     final batch = db!.batch();
+
     for (var vocab in vocabularies) {
       batch.insert(EnglishDatabaseHelper.vocabularyTableName, vocab.toMap(),
           conflictAlgorithm: ConflictAlgorithm.replace);
     }
+
     await batch.commit();
   }
 }

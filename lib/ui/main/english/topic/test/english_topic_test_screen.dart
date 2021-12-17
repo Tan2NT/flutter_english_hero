@@ -6,11 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 class EnglishTopicTestScreen extends BasePageScreen {
-  static final routeName = '/english-test';
+  static const routeName = '/english-test';
 
-  EnglishTopicTestViewModel _viewModel;
+  final EnglishTopicTestViewModel _viewModel;
 
-  EnglishTopicTestScreen(this._viewModel);
+  const EnglishTopicTestScreen(this._viewModel, {Key? key}) : super(key: key);
 
   @override
   State<EnglishTopicTestScreen> createState() => _EnglishTopicTestScreenState();
@@ -84,7 +84,9 @@ class _EnglishTopicTestScreenState
               content: Text(
                   'You answered $correctAnswer out of $totalQuestion questions correctly !'),
               actions: [
-                FlatButton(
+                ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        textStyle: const TextStyle(fontSize: 20)),
                     onPressed: () {
                       model.resetAnswers();
                       Navigator.pop(context, true);
@@ -97,7 +99,9 @@ class _EnglishTopicTestScreenState
                           fontSize: 20,
                           fontWeight: FontWeight.bold),
                     )),
-                FlatButton(
+                ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        textStyle: const TextStyle(fontSize: 20)),
                     onPressed: () async {
                       await model.resetAnswers();
                       Navigator.pop(context, true);

@@ -4,7 +4,7 @@ import '../../model/user/user.dart';
 import '../../repository/user/user_repository.dart';
 
 class AuthenticateUseCase {
-  UserRepository _userRepo;
+  final UserRepository _userRepo;
 
   AuthenticateUseCase(this._userRepo);
 

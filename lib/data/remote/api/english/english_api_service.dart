@@ -4,20 +4,15 @@ import '../../../common/model/english/topic_entity.dart';
 import 'dart:async';
 
 class EnglishApiService extends ApiBaseHelper {
-  static const BASE_URL =
-      'https://flutter-english-hero-default-rtdb.firebaseio.com';
-  final TOPICS_SERVICE_NAME = "topics";
-  final VOCABULARIES_SERVICE_NAME = "vocabularies";
+  final baseUrl = 'https://flutter-english-hero-default-rtdb.firebaseio.com';
+  final topicsServiceName = "topics";
+  final vocabulariesServiceName = "vocabularies";
 
   Future<List<EnglishTopicEntity>> fetchAllTopics(String authToken) async {
-    final url =
-        Uri.parse('$BASE_URL/$TOPICS_SERVICE_NAME.json?auth=$authToken');
+    final url = Uri.parse('$baseUrl/$topicsServiceName.json?auth=$authToken');
     try {
       final extractedData =
-          await performRequest(RequestMethod.GET, url) as List<dynamic>;
-      if (extractedData == null) {
-        return [];
-      }
+          await performRequest(RequestMethod.get, url) as List<dynamic>;
       List<EnglishTopicEntity> topics = [];
       for (var tocpicData in extractedData) {
         topics.add(EnglishTopicEntity.fromJson(tocpicData));
@@ -31,14 +26,10 @@ class EnglishApiService extends ApiBaseHelper {
   Future<List<VocabularyEntity>> fetchVocabulariesByTopic(
       int topicId, String authToken) async {
     final url = Uri.parse(
-        '$BASE_URL/$VOCABULARIES_SERVICE_NAME/$topicId.json?auth=$authToken');
+        '$baseUrl/$vocabulariesServiceName/$topicId.json?auth=$authToken');
     try {
       final extractedData =
-          await performRequest(RequestMethod.GET, url) as List<dynamic>;
-
-      if (extractedData == null) {
-        return [];
-      }
+          await performRequest(RequestMethod.get, url) as List<dynamic>;
       List<VocabularyEntity> vocabularies = [];
       for (var vocabularyData in extractedData) {
         vocabularies.add(VocabularyEntity.fromJson(vocabularyData));

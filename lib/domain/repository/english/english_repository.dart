@@ -19,15 +19,15 @@ abstract class EnglishRepository {
 }
 
 class EnglishRepositoryimpl extends EnglishRepository {
-  EnglishRemoteDataSource _remoteDataSource;
-  EnglishLocalDataSource _LocalDataSource;
+  final EnglishRemoteDataSource _remoteDataSource;
+  final EnglishLocalDataSource _localDataSource;
 
-  EnglishRepositoryimpl(this._remoteDataSource, this._LocalDataSource);
+  EnglishRepositoryimpl(this._remoteDataSource, this._localDataSource);
 
   @override
   Future<List<EnglishTopic>> fetchAllTopics(String authToken) async {
     final fetchedTopics = (await _remoteDataSource.fetchAllTopics(authToken));
-    _LocalDataSource.saveTopics(fetchedTopics);
+    _localDataSource.saveTopics(fetchedTopics);
 
     return fetchedTopics
         .map((topicEntity) => EnglishToPicMapper().mapFromEntity(topicEntity))
@@ -36,12 +36,12 @@ class EnglishRepositoryimpl extends EnglishRepository {
 
   @override
   Future<void> saveTopics(List<EnglishTopicEntity> topics) async {
-    return _LocalDataSource.saveTopics(topics);
+    return _localDataSource.saveTopics(topics);
   }
 
   @override
   Future<List<EnglishTopic>> getAllTopics() async {
-    final topics = (await _LocalDataSource.getTopics())
+    final topics = (await _localDataSource.getTopics())
         .map((topicEntity) => EnglishToPicMapper().mapFromEntity(topicEntity))
         .toList();
     return topics;
@@ -52,7 +52,7 @@ class EnglishRepositoryimpl extends EnglishRepository {
       int topicId, String authToken) async {
     final fetchedVocabularies =
         await _remoteDataSource.fetchVocabulariesByTopic(topicId, authToken);
-    _LocalDataSource.saveVocabularies(fetchedVocabularies);
+    _localDataSource.saveVocabularies(fetchedVocabularies);
 
     final vocabularies = fetchedVocabularies
         .map((vocabEntity) =>
@@ -64,7 +64,7 @@ class EnglishRepositoryimpl extends EnglishRepository {
   @override
   Future<List<Vocabulary>> getVocabulariesByTopicId(int topicId) async {
     final vocabularies =
-        (await _LocalDataSource.getVocabulariesBytopic(topicId))
+        (await _localDataSource.getVocabulariesBytopic(topicId))
             .map((vocabEntity) =>
                 EnglishVocabularyMapper().mapFromEntity(vocabEntity))
             .toList();
@@ -73,6 +73,6 @@ class EnglishRepositoryimpl extends EnglishRepository {
 
   @override
   Future<void> saveVocabularies(List<VocabularyEntity> vocabularies) async {
-    return _LocalDataSource.saveVocabularies(vocabularies);
+    return _localDataSource.saveVocabularies(vocabularies);
   }
 }

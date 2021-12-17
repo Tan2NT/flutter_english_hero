@@ -19,8 +19,8 @@ class AuthScreen extends StatelessWidget {
             decoration: BoxDecoration(
                 gradient: LinearGradient(
                     colors: [
-                      Color.fromRGBO(215, 117, 255, 1).withOpacity(0.5),
-                      Color.fromRGBO(255, 188, 117, 1).withOpacity(0.9),
+                      const Color.fromRGBO(215, 117, 255, 1).withOpacity(0.5),
+                      const Color.fromRGBO(255, 188, 117, 1).withOpacity(0.9),
                     ],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
@@ -54,6 +54,7 @@ class AuthScreen extends StatelessWidget {
                       'English Hero',
                       style: TextStyle(
                           color: Theme.of(context)
+                              // ignore: deprecated_member_use
                               .accentTextTheme
                               .headline6!
                               .color,

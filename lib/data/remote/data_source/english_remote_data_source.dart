@@ -1,6 +1,5 @@
 import 'package:english_hero/data/common/model/english/vocabulary.dart';
 import 'package:english_hero/data/remote/api/english/english_api_service.dart';
-import 'package:english_hero/data/remote/api/user/user_api_service.dart';
 import '.././../common/model/english/topic_entity.dart';
 
 abstract class EnglishRemoteDataSource {

@@ -2,7 +2,6 @@ import 'package:english_hero/domain/model/auth_mode.dart';
 import 'package:english_hero/ui/main/english/topic/list/english_topics_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import 'package:flutter/services.dart';
 import '../../../presentation/provider/user_provider.dart';
 
@@ -21,6 +20,7 @@ class _AuthCardState extends State<AuthCard>
     with SingleTickerProviderStateMixin {
   final GlobalKey<FormState> _formKey = GlobalKey();
   AuthMode _authMode = AuthMode.login;
+  // ignore: prefer_final_fields
   Map<String, String> _authData = {'email': '', 'password': ''};
   bool _isLoading = false;
   final _passwordController = TextEditingController();
@@ -31,14 +31,14 @@ class _AuthCardState extends State<AuthCard>
   @override
   void initState() {
     super.initState();
-    _controller =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 500));
-    _slideAnimation = Tween<Offset>(begin: Offset(0, -1.5), end: Offset(0, 0))
+    _controller = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 500));
+    _slideAnimation = Tween<Offset>(
+            begin: const Offset(0, -1.5), end: const Offset(0, 0))
         .animate(
             CurvedAnimation(parent: _controller!, curve: Curves.fastOutSlowIn));
     _opacityAnimation = Tween(begin: 0.0, end: 1.0)
         .animate(CurvedAnimation(parent: _controller!, curve: Curves.easeIn));
-    // _heightAnimation!.addListener(() => setState(() {}));
   }
 
   @override
@@ -51,10 +51,13 @@ class _AuthCardState extends State<AuthCard>
     showDialog(
         context: context,
         builder: (ctx) => AlertDialog(
-              title: const Text('An Error Occured!'),
+              title: Text('An Error Occured!',
+                  style: Theme.of(context).textTheme.headline6),
               content: Text(message),
               actions: [
-                FlatButton(
+                ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        textStyle: const TextStyle(fontSize: 20)),
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
@@ -81,6 +84,7 @@ class _AuthCardState extends State<AuthCard>
         Navigator.of(context)
             .pushReplacementNamed(EnglishTopicsScreen.routeName);
       }
+      // ignore: empty_catches
     } catch (error) {}
 
     if (userProvider.errorMessage.isNotEmpty) {
@@ -113,7 +117,7 @@ class _AuthCardState extends State<AuthCard>
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
       elevation: 8.0,
       child: AnimatedContainer(
-        duration: Duration(milliseconds: 500),
+        duration: const Duration(milliseconds: 500),
         curve: Curves.easeIn,
         height: _authMode == AuthMode.signUp ? 320 : 260,
         // height: _heightAnimation!.value.height,
@@ -122,14 +126,14 @@ class _AuthCardState extends State<AuthCard>
           // minHeight: _heightAnimation!.value.height
         ),
         width: deviceSize.width * 0.75,
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Form(
             key: _formKey,
             child: SingleChildScrollView(
               child: Column(
                 children: [
                   TextFormField(
-                    decoration: InputDecoration(labelText: 'E-Mail'),
+                    decoration: const InputDecoration(labelText: 'E-Mail'),
                     keyboardType: TextInputType.emailAddress,
                     validator: (value) {
                       if (value!.isEmpty || !value.contains('@')) {
@@ -141,7 +145,7 @@ class _AuthCardState extends State<AuthCard>
                     },
                   ),
                   TextFormField(
-                    decoration: InputDecoration(labelText: 'Password'),
+                    decoration: const InputDecoration(labelText: 'Password'),
                     obscureText: true,
                     controller: _passwordController,
                     validator: (value) {
@@ -154,7 +158,7 @@ class _AuthCardState extends State<AuthCard>
                     },
                   ),
                   AnimatedContainer(
-                    duration: Duration(milliseconds: 300),
+                    duration: const Duration(milliseconds: 300),
                     constraints: BoxConstraints(
                         minHeight: _authMode == AuthMode.signUp ? 60 : 0,
                         maxHeight: _authMode == AuthMode.signUp ? 120 : 0),
@@ -184,6 +188,7 @@ class _AuthCardState extends State<AuthCard>
                   if (_isLoading)
                     const CircularProgressIndicator()
                   else
+                    // ignore: deprecated_member_use
                     RaisedButton(
                       onPressed: _submit,
                       child: Text(
@@ -196,6 +201,7 @@ class _AuthCardState extends State<AuthCard>
                       textColor:
                           Theme.of(context).primaryTextTheme.button!.color,
                     ),
+                  // ignore: deprecated_member_use
                   FlatButton(
                     onPressed: _switchAuthMode,
                     child: Text(

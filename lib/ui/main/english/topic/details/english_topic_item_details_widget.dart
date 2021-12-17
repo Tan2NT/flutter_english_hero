@@ -6,7 +6,8 @@ class EnglishTopicItemDetailsWidget extends StatefulWidget {
   final Vocabulary _vocabulary;
   final int _index;
 
-  EnglishTopicItemDetailsWidget(this._vocabulary, this._index);
+  const EnglishTopicItemDetailsWidget(this._vocabulary, this._index, {Key? key})
+      : super(key: key);
 
   @override
   _EnglishTopicItemDetailsWidgetState createState() =>
@@ -32,18 +33,18 @@ class _EnglishTopicItemDetailsWidgetState
   @override
   Widget build(BuildContext context) {
     return Card(
-        margin: EdgeInsets.symmetric(vertical: 8, horizontal: 5),
+        margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 5),
         elevation: 5,
         child: ListTile(
           leading: CircleAvatar(
             backgroundColor: _bgColor,
             radius: 30,
             child: Padding(
-                padding: EdgeInsets.all(10),
+                padding: const EdgeInsets.all(10),
                 child: FittedBox(
                   child: Text(
                     '${widget._index}',
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                         fontSize: 20),

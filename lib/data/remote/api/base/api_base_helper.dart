@@ -13,16 +13,16 @@ class ApiBaseHelper {
     try {
       dynamic response;
       switch (method) {
-        case RequestMethod.GET:
+        case RequestMethod.get:
           response = await http.get(url);
           break;
-        case RequestMethod.POST:
+        case RequestMethod.post:
           response = await http.post(url, body: body);
           break;
-        case RequestMethod.PUT:
+        case RequestMethod.put:
           response = await http.put(url, body: body);
           break;
-        case RequestMethod.DELETE:
+        case RequestMethod.delete:
           response = await http.delete(url);
           break;
       }
@@ -58,4 +58,4 @@ class ApiBaseHelper {
   }
 }
 
-enum RequestMethod { GET, POST, PUT, DELETE }
+enum RequestMethod { get, post, put, delete }

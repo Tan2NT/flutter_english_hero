@@ -14,7 +14,7 @@ class UserProvider with ChangeNotifier {
   Timer? _authTimer;
   String errorMessage = '';
 
-  AuthenticateUseCase _authenticateUseCase;
+  final AuthenticateUseCase _authenticateUseCase;
 
   UserProvider(this._authenticateUseCase);
 
@@ -72,8 +72,8 @@ class UserProvider with ChangeNotifier {
       'userId': _user.userId,
       'expiryDate': _user.expiryDate?.toIso8601String()
     });
-    PreferenceUtils.setString(Constants.USER_DATA_KEY, userData);
-    PreferenceUtils.setString(Constants.USER_TOKEN_KEY, _user.token);
+    PreferenceUtils.setString(Constants.userDataKey, userData);
+    PreferenceUtils.setString(Constants.userTokenKey, _user.token);
   }
 
   Future<bool> tryAutoLogin() async {
@@ -87,7 +87,7 @@ class UserProvider with ChangeNotifier {
   }
 
   User? loadSavedUser() {
-    final encodedUserData = PreferenceUtils.getString(Constants.USER_DATA_KEY);
+    final encodedUserData = PreferenceUtils.getString(Constants.userDataKey);
     if (encodedUserData.isEmpty) {
       return null;
     }
@@ -116,8 +116,8 @@ class UserProvider with ChangeNotifier {
     }
     errorMessage = '';
     notifyListeners();
-    PreferenceUtils.setString(Constants.USER_DATA_KEY, "");
-    PreferenceUtils.setString(Constants.USER_TOKEN_KEY, "");
+    PreferenceUtils.setString(Constants.userDataKey, "");
+    PreferenceUtils.setString(Constants.userTokenKey, "");
   }
 
   void _autoLogout() {

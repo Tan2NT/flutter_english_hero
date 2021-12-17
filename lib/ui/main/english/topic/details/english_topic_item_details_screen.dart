@@ -8,9 +8,10 @@ import 'package:scoped_model/scoped_model.dart';
 class EnglishTopicItemDetailsScreen extends BasePageScreen {
   static const String routeName = '/topic-detail';
 
-  EnglishTopicItemDetailsViewModel _viewModel;
+  final EnglishTopicItemDetailsViewModel _viewModel;
 
-  EnglishTopicItemDetailsScreen(this._viewModel);
+  const EnglishTopicItemDetailsScreen(this._viewModel, {Key? key})
+      : super(key: key);
 
   @override
   State<EnglishTopicItemDetailsScreen> createState() =>

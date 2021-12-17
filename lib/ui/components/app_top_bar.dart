@@ -1,25 +1,22 @@
 import 'package:flutter/material.dart';
 
 class MyAppBar extends AppBar {
-  final BuildContext _context;
-  final String _title;
-  final bool _canGoBack;
-
-  MyAppBar(this._context, this._title, this._canGoBack)
+  MyAppBar(BuildContext context, String title, bool canGoBack, {Key? key})
       : super(
-          backgroundColor: Theme.of(_context).primaryColor,
-          leading: _canGoBack
+          key: key,
+          backgroundColor: Theme.of(context).primaryColor,
+          leading: canGoBack
               ? IconButton(
                   onPressed: () {
-                    if (Navigator.of(_context).canPop()) {
-                      Navigator.of(_context).pop();
+                    if (Navigator.of(context).canPop()) {
+                      Navigator.of(context).pop();
                     }
                   },
-                  icon: Icon(Icons.arrow_back_ios))
+                  icon: const Icon(Icons.arrow_back_ios))
               : const Text(''),
           title: Center(
             child: Text(
-              _title,
+              title,
               style: const TextStyle(
                   color: Colors.white,
                   fontSize: 24,

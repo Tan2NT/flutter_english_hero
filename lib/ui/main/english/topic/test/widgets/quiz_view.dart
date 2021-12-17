@@ -6,11 +6,13 @@ class QuizView extends StatefulWidget {
   final List<String> choices;
   final void Function(int, String) answerHandler;
 
-  QuizView(
-      {required this.index,
+  const QuizView(
+      {Key? key,
+      required this.index,
       required this.question,
       required this.choices,
-      required this.answerHandler});
+      required this.answerHandler})
+      : super(key: key);
 
   @override
   State<QuizView> createState() => _QuizState();
@@ -35,7 +37,7 @@ class _QuizState extends State<QuizView> {
                   '${widget.index}.  ',
                   style: Theme.of(context).textTheme.headline5,
                 ),
-                Text('${widget.question}',
+                Text(widget.question,
                     style: const TextStyle(
                       color: Colors.blueAccent,
                       fontSize: 26,

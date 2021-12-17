@@ -12,8 +12,8 @@ abstract class EnglishLocalDataSource {
 }
 
 class EnglishLocalDataSourceImpl extends EnglishLocalDataSource {
-  EnglishTopicDAO _topicDAO;
-  EnglishVocabulariesDAO _vocabulariesDAO;
+  final EnglishTopicDAO _topicDAO;
+  final EnglishVocabulariesDAO _vocabulariesDAO;
 
   EnglishLocalDataSourceImpl(this._topicDAO, this._vocabulariesDAO);
 

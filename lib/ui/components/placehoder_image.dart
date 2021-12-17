@@ -6,7 +6,8 @@ class PlacehoderImage extends StatefulWidget {
   final String _localAsset;
   final String _remoteAssert;
 
-  PlacehoderImage(this._localAsset, this._remoteAssert);
+  const PlacehoderImage(this._localAsset, this._remoteAssert, {Key? key})
+      : super(key: key);
 
   @override
   _PlacehoderImageState createState() => _PlacehoderImageState();
