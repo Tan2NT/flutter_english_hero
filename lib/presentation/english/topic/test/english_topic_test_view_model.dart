@@ -10,8 +10,6 @@ class EnglishTopicTestViewModel extends Model {
 
   EnglishTopicTestViewModel(this.getVocabulariesUsecase);
 
-  bool _isPopulatedQuiz = false;
-
   Quiz quiz = Quiz([], 0);
 
   Future populateQuiz(int topicId) async {

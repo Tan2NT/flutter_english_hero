@@ -1,7 +1,7 @@
 import 'package:english_hero/core/exception/http_exception.dart';
 import 'package:english_hero/domain/model/auth_mode.dart';
-import 'package:english_hero/presentation/utils/constants.dart';
-import 'package:english_hero/presentation/utils/shared_preference_util.dart';
+import 'package:english_hero/presentation/base/constants.dart';
+import 'package:english_hero/core/exception/utils/shared_preference_util.dart';
 import 'package:flutter/foundation.dart';
 import 'dart:convert';
 import 'dart:async';

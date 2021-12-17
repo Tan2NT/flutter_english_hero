@@ -1,8 +1,10 @@
-import 'package:english_hero/presentation/provider/user_provider.dart';
+import 'package:english_hero/core/exception/app_exception.dart';
+import 'package:english_hero/core/exception/exception_model.dart';
+import 'package:english_hero/di/injection/injetion.dart';
 import 'package:english_hero/ui/components/app_drawer.dart';
 import 'package:english_hero/ui/components/app_top_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:scoped_model/scoped_model.dart';
 
 abstract class BasePageScreen extends StatefulWidget {
   const BasePageScreen({Key? key}) : super(key: key);
@@ -33,9 +35,20 @@ abstract class BasePageScreenState<Page extends BasePageScreen>
 }
 
 mixin BaseScreen<Page extends BasePageScreen> on BasePageScreenState<Page> {
-  late UserProvider userProvider;
   @override
   Widget build(BuildContext context) {
+    return ScopedModel(
+        model: getIt.get<ExceptionModel>(),
+        child: ScopedModelDescendant<ExceptionModel>(
+          builder: (ctx, child, model) => getAppWidget(model),
+        ));
+  }
+
+  Widget getAppWidget(ExceptionModel exceptionViewModel) {
+    if (exceptionViewModel.hasException()) {
+      handleError(exceptionViewModel.getException());
+    }
+
     if (_isShowAppBar && _isShowDrawer) {
       return appWithAppBarAndDrawer();
     } else if (_isShowAppBar && !_isShowDrawer) {
@@ -47,19 +60,23 @@ mixin BaseScreen<Page extends BasePageScreen> on BasePageScreenState<Page> {
     }
   }
 
-  void showMessage() {
+  void handleError(AppException exception) {
+    showMessage(exception);
+  }
+
+  void showMessage(AppException exception) {
     Future.delayed(Duration.zero, () async {
       showDialog(
           context: context,
           builder: (ctx) => AlertDialog(
-                title: Text('An Error Occured!'),
-                content: Text('Hello :DD:D:D: '),
+                title: const Text('An Error Occured!'),
+                content: Text(exception.toExceptionString()),
                 actions: [
                   FlatButton(
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
-                      child: Text('Okay'))
+                      child: const Text('Okay'))
                 ],
               ));
     });

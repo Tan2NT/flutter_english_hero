@@ -4,8 +4,7 @@ import 'package:english_hero/domain/usecase/english/fetch_vocabularies_by_topic_
 import 'package:english_hero/domain/usecase/english/get_all_english_topic_use_case.dart';
 import 'package:english_hero/domain/usecase/english/get_all_vocabularies_by_topic_use_case.dart';
 import 'package:english_hero/presentation/base/constants.dart';
-import 'package:english_hero/presentation/base/shared_preference_util.dart';
-import 'package:flutter/foundation.dart';
+import 'package:english_hero/core/exception/utils/shared_preference_util.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:scoped_model/scoped_model.dart';
 
