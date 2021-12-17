@@ -18,6 +18,12 @@ class UserProvider with ChangeNotifier {
 
   UserProvider(this._authenticateUseCase);
 
+  String get userName {
+    final end = _user.email.lastIndexOf('@');
+    if (end == -1) return _user.email;
+    return _user.email.substring(0, end);
+  }
+
   String get token {
     final savedUser = loadSavedUser();
     return savedUser == null ? '' : savedUser.token;
@@ -101,11 +107,12 @@ class UserProvider with ChangeNotifier {
       return null;
     }
 
-    return User(
+    _user = User(
         email: extractedUserData['email'] as String,
         userId: extractedUserData['userId'] as String,
         token: extractedUserData['token'] as String,
         expiryDate: expiryDate);
+    return _user;
   }
 
   Future<void> logout() async {
