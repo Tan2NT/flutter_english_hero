@@ -1,3 +1,5 @@
+// ignore: implementation_imports
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:english_hero/presentation/provider/user_provider.dart';
 import 'package:english_hero/ui/base/base_page_screen.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +19,7 @@ class _ProfileScreenState extends BasePageScreenState<ProfileScreen>
   @override
   void initState() {
     isBackButton(false);
-    appBarTitle('Profile');
+    appBarTitle('profile'.tr());
     super.initState();
   }
 
@@ -42,9 +44,9 @@ class _ProfileScreenState extends BasePageScreenState<ProfileScreen>
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text(
-                  'Hello, ',
-                  style: TextStyle(color: Colors.blue, fontSize: 24),
+                Text(
+                  'welcome'.tr() + ', ',
+                  style: const TextStyle(color: Colors.blue, fontSize: 24),
                 ),
                 Text(user.userName,
                     style: const TextStyle(

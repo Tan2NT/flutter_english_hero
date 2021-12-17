@@ -1,3 +1,5 @@
+// ignore: implementation_imports
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:english_hero/domain/model/english/topic.dart';
 import 'package:english_hero/ui/main/english/topic/details/english_topic_item_details_screen.dart';
 import 'package:english_hero/ui/components/placehoder_image.dart';
@@ -27,16 +29,16 @@ class EnglishTopicItemWidget extends StatelessWidget {
                   onTap: () => Future(() => Navigator.of(context).pushNamed(
                       EnglishTopicItemDetailsScreen.routeName,
                       arguments: _englishTopic)),
-                  child: const Text('Learn',
-                      style: TextStyle(
+                  child: Text('learn'.tr(),
+                      style: const TextStyle(
                           color: Colors.blue, fontWeight: FontWeight.bold)),
                   value: '0'),
               PopupMenuItem<String>(
                   onTap: () => Future(() => Navigator.of(context).pushNamed(
                       EnglishTopicTestScreen.routeName,
                       arguments: _englishTopic)),
-                  child: const Text('Test',
-                      style: TextStyle(
+                  child: Text('test'.tr(),
+                      style: const TextStyle(
                           color: Colors.blue, fontWeight: FontWeight.bold)),
                   value: '1'),
             ]);
@@ -80,7 +82,8 @@ class EnglishTopicItemWidget extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            '${_englishTopic.vocabularyCount} vocabularies',
+                            '${_englishTopic.vocabularyCount} ' +
+                                'vocabularies'.tr(),
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 14,

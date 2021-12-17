@@ -1,3 +1,5 @@
+// ignore: implementation_imports
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:english_hero/domain/model/auth_mode.dart';
 import 'package:english_hero/ui/components/message_dialog.dart';
 import 'package:english_hero/ui/main/english/topic/list/english_topics_screen.dart';
@@ -51,8 +53,8 @@ class _AuthCardState extends State<AuthCard>
   void _showErrorDialog(String message) {
     showDialog(
         context: context,
-        builder: (ctx) =>
-            MessageDialog('An Error Occured!', message, 'Okay', null));
+        builder: (ctx) => MessageDialog(
+            'error_dialog_title'.tr(), message, 'okay_button_text'.tr(), null));
   }
 
   Future<void> _submit() async {
@@ -109,10 +111,8 @@ class _AuthCardState extends State<AuthCard>
         duration: const Duration(milliseconds: 500),
         curve: Curves.easeIn,
         height: _authMode == AuthMode.signUp ? 320 : 260,
-        // height: _heightAnimation!.value.height,
         constraints: BoxConstraints(
           minHeight: _authMode == AuthMode.signUp ? 320 : 260,
-          // minHeight: _heightAnimation!.value.height
         ),
         width: deviceSize.width * 0.75,
         padding: const EdgeInsets.all(16.0),
@@ -122,11 +122,11 @@ class _AuthCardState extends State<AuthCard>
               child: Column(
                 children: [
                   TextFormField(
-                    decoration: const InputDecoration(labelText: 'E-Mail'),
+                    decoration: InputDecoration(labelText: 'email_label'.tr()),
                     keyboardType: TextInputType.emailAddress,
                     validator: (value) {
                       if (value!.isEmpty || !value.contains('@')) {
-                        return 'Invalid Email!';
+                        return 'error_invalid_email_validate'.tr();
                       }
                     },
                     onSaved: (value) {
@@ -134,12 +134,12 @@ class _AuthCardState extends State<AuthCard>
                     },
                   ),
                   TextFormField(
-                    decoration: const InputDecoration(labelText: 'Password'),
+                    decoration: InputDecoration(labelText: 'password'.tr()),
                     obscureText: true,
                     controller: _passwordController,
                     validator: (value) {
                       if (value!.isEmpty || value.length < 5) {
-                        return 'Password is too short!';
+                        return 'error_password_too_short'.tr();
                       }
                     },
                     onSaved: (value) {
@@ -158,13 +158,13 @@ class _AuthCardState extends State<AuthCard>
                         position: _slideAnimation!,
                         child: TextFormField(
                             enabled: _authMode == AuthMode.signUp,
-                            decoration: const InputDecoration(
-                                labelText: 'Confirm Password'),
+                            decoration: InputDecoration(
+                                labelText: 'confirm_password_label'.tr()),
                             obscureText: true,
                             validator: _authMode == AuthMode.signUp
                                 ? (value) {
                                     if (value! != _passwordController.text) {
-                                      return 'Password does not match!';
+                                      return 'error_password_not_match'.tr();
                                     }
                                   }
                                 : null),
@@ -180,8 +180,9 @@ class _AuthCardState extends State<AuthCard>
                     // ignore: deprecated_member_use
                     RaisedButton(
                       onPressed: _submit,
-                      child: Text(
-                          _authMode == AuthMode.login ? 'LOGIN' : 'SIGN UP'),
+                      child: Text(_authMode == AuthMode.login
+                          ? 'login'.tr()
+                          : 'sign_up'.tr()),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30)),
                       padding: const EdgeInsets.symmetric(
@@ -194,7 +195,8 @@ class _AuthCardState extends State<AuthCard>
                   FlatButton(
                     onPressed: _switchAuthMode,
                     child: Text(
-                        '${_authMode == AuthMode.login ? 'SIGN UP' : 'LOGIN'} INSTEAD'),
+                        '${_authMode == AuthMode.login ? 'sign_up'.tr() : 'login'.tr()} instead'
+                            .tr()),
                     padding: const EdgeInsets.symmetric(
                         horizontal: 30.0, vertical: 4),
                     materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,

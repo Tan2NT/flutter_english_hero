@@ -1,3 +1,5 @@
+// ignore: implementation_imports
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:english_hero/presentation/provider/user_provider.dart';
 import 'package:english_hero/ui/main/authentication/auth_screen.dart';
 import 'package:english_hero/ui/main/english/topic/list/english_topics_screen.dart';
@@ -14,12 +16,12 @@ class AppDrawer extends StatelessWidget {
       child: Column(
         children: [
           AppBar(
-              title: const Text('English Hero!'),
+              title: const Text('app_name').tr(),
               automaticallyImplyLeading: false),
           const Divider(),
           ListTile(
             leading: const Icon(Icons.school),
-            title: const Text('Study'),
+            title: const Text('study').tr(),
             onTap: () {
               Navigator.of(context)
                   .pushReplacementNamed(EnglishTopicsScreen.routeName);
@@ -28,7 +30,7 @@ class AppDrawer extends StatelessWidget {
           const Divider(),
           ListTile(
             leading: const Icon(Icons.person_pin_rounded),
-            title: const Text('Profile'),
+            title: const Text('profile'),
             onTap: () {
               Navigator.of(context)
                   .pushReplacementNamed(ProfileScreen.routeName);
@@ -37,7 +39,7 @@ class AppDrawer extends StatelessWidget {
           const Divider(),
           ListTile(
             leading: const Icon(Icons.exit_to_app),
-            title: const Text('Logout'),
+            title: const Text('log_out').tr(),
             onTap: () {
               Navigator.of(context).pushReplacementNamed(AuthScreen.routeName);
               Provider.of<UserProvider>(context, listen: false).logout();

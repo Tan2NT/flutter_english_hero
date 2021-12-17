@@ -1,3 +1,5 @@
+// ignore: implementation_imports
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'auth_card.dart';
@@ -51,7 +53,7 @@ class AuthScreen extends StatelessWidget {
                               offset: Offset(0, 2))
                         ]),
                     child: Text(
-                      'English Hero',
+                      'app_name'.tr(),
                       style: TextStyle(
                           color: Theme.of(context)
                               // ignore: deprecated_member_use

@@ -66,7 +66,7 @@ class UserProvider with ChangeNotifier {
         errorMessage = 'The password is incorrect.';
       }
     } catch (error) {
-      errorMessage = 'could not authenticate you. Please try again later.';
+      errorMessage = 'Could not authenticate you. Please try again later.';
     }
     return false;
   }

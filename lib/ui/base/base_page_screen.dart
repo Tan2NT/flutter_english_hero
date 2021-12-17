@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:english_hero/core/exception/app_exception.dart';
 import 'package:english_hero/core/exception/exception_model.dart';
 import 'package:english_hero/di/injection/injetion.dart';
@@ -69,8 +70,8 @@ mixin BaseScreen<Page extends BasePageScreen> on BasePageScreenState<Page> {
     Future.delayed(Duration.zero, () async {
       showDialog(
           context: context,
-          builder: (ctx) => MessageDialog('An Error Occured!',
-              exception.toExceptionString(), 'Okay', null));
+          builder: (ctx) => MessageDialog(tr('error_dialog_title'),
+              exception.toExceptionString(), tr('okay_button_text'), null));
     });
   }
 

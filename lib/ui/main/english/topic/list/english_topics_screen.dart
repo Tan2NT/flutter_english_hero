@@ -1,3 +1,5 @@
+// ignore: implementation_imports
+import "package:easy_localization/src/public_ext.dart";
 import 'package:english_hero/presentation/english/topic/list/english_topics_view_model.dart';
 import 'package:english_hero/ui/base/base_page_screen.dart';
 import 'package:english_hero/ui/main/english/topic/list/widgets/english_topic_item_widget.dart';
@@ -20,7 +22,7 @@ class _EnglishTopicsScreenState extends BasePageScreenState<EnglishTopicsScreen>
   @override
   void initState() {
     isBackButton(false);
-    appBarTitle('English Topics');
+    appBarTitle('app_name'.tr());
     super.initState();
   }
 

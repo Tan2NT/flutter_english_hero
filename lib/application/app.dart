@@ -1,3 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
+// ignore: implementation_imports
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:english_hero/di/injection/injetion.dart';
 import 'package:english_hero/presentation/english/topic/details/english_topic_item_details_view_model.dart';
 import 'package:english_hero/presentation/english/topic/list/english_topics_view_model.dart';
@@ -27,7 +30,10 @@ class Application extends StatelessWidget {
         ],
         child: Consumer<UserProvider>(
           builder: (ctx, auth, _) => MaterialApp(
-            title: 'English Hero',
+            localizationsDelegates: context.localizationDelegates,
+            supportedLocales: context.supportedLocales,
+            locale: context.locale,
+            title: tr('app_name'),
             theme: ThemeData(
                 primarySwatch: Colors.purple,
                 primaryColorDark: Colors.deepOrange,

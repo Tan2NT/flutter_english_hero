@@ -1,3 +1,5 @@
+// ignore: implementation_imports
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:english_hero/domain/model/english/topic.dart';
 import 'package:english_hero/presentation/english/topic/test/english_topic_test_view_model.dart';
 import 'package:english_hero/ui/base/base_page_screen.dart';
@@ -80,9 +82,15 @@ class _EnglishTopicTestScreenState
     showDialog(
         context: context,
         builder: (ctx) => AlertDialog(
-              title: const Text('Test Result'),
-              content: Text(
-                  'You answered $correctAnswer out of $totalQuestion questions correctly !'),
+              title: Text(
+                'test_result_title'.tr(),
+                style: const TextStyle(
+                    color: Colors.blue,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold),
+              ),
+              content: const Text('test_result_details').tr(
+                  args: [correctAnswer.toString(), totalQuestion.toString()]),
               actions: [
                 ElevatedButton(
                     style: ElevatedButton.styleFrom(
@@ -92,12 +100,9 @@ class _EnglishTopicTestScreenState
                       Navigator.pop(context, true);
                       Navigator.pop(context, true);
                     },
-                    child: const Text(
-                      'Home',
-                      style: TextStyle(
-                          color: Colors.blue,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold),
+                    child: Text(
+                      'home'.tr(),
+                      style: const TextStyle(fontSize: 20),
                     )),
                 ElevatedButton(
                     style: ElevatedButton.styleFrom(
@@ -106,11 +111,8 @@ class _EnglishTopicTestScreenState
                       await model.resetAnswers();
                       Navigator.pop(context, true);
                     },
-                    child: const Text('Try again',
-                        style: TextStyle(
-                            color: Colors.blue,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold)))
+                    child: Text('try_again'.tr(),
+                        style: const TextStyle(fontSize: 20)))
               ],
             ));
   }
