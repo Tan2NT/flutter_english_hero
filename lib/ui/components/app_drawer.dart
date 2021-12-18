@@ -2,7 +2,7 @@
 import 'package:easy_localization/src/public_ext.dart';
 import 'package:english_hero/presentation/provider/user_provider.dart';
 import 'package:english_hero/ui/main/authentication/auth_screen.dart';
-import 'package:english_hero/ui/main/english/topic/list/english_topics_screen.dart';
+import 'package:english_hero/ui/main/english/topic/english_topics_screen.dart';
 import 'package:english_hero/ui/main/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -30,7 +30,7 @@ class AppDrawer extends StatelessWidget {
           const Divider(),
           ListTile(
             leading: const Icon(Icons.person_pin_rounded),
-            title: const Text('profile'),
+            title: const Text('profile').tr(),
             onTap: () {
               Navigator.of(context)
                   .pushReplacementNamed(ProfileScreen.routeName);

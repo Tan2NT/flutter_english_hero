@@ -15,6 +15,9 @@ class SplashScreen extends StatelessWidget {
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               stops: const [0, 1])),
+      child: const Center(
+        child: CircularProgressIndicator(),
+      ),
     );
   }
 }

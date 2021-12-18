@@ -2,7 +2,7 @@
 import 'package:easy_localization/src/public_ext.dart';
 import 'package:english_hero/domain/model/auth_mode.dart';
 import 'package:english_hero/ui/components/message_dialog.dart';
-import 'package:english_hero/ui/main/english/topic/list/english_topics_screen.dart';
+import 'package:english_hero/ui/main/english/topic/english_topics_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/services.dart';
