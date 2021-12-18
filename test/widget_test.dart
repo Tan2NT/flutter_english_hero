@@ -5,25 +5,57 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
-import 'package:english_hero/application/app.dart';
+import 'package:english_hero/ui/components/app_top_bar.dart';
+import 'package:english_hero/ui/main/authentication/auth_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+  myAppBarTest();
+  authScreenTest();
+}
+
+Widget createWidgetForTesting(Widget childWidget) {
+  return MediaQuery(
+      data: const MediaQueryData(),
+      child: MaterialApp(
+        home: childWidget,
+      ));
+}
+
+void authScreenTest() {
+  testWidgets('Authenticate screen test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const Application());
+    await tester.pumpWidget(createWidgetForTesting(const AuthScreen()));
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    // Verify if username and password present
+    expect(find.byKey(const Key('tff_email')), findsOneWidget);
+    expect(find.byKey(const Key('tff_password')), findsOneWidget);
+    expect(find.byKey(const Key('btn_submit')), findsOneWidget);
+    expect(find.byKey(const Key('btn_login_switch')), findsOneWidget);
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    // Enter user information
+    await tester.enterText(
+        find.byKey(const Key('tff_email')), 'tanhoang@gmail.com');
+    await tester.enterText(find.byKey(const Key('tff_password')), '111111');
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    // Verify if user information has filled
+    expect(find.text('tanhoang@gmail.com'), findsOneWidget);
+    expect(find.text('111111'), findsOneWidget);
+  });
+}
+
+void myAppBarTest() {
+  testWidgets('MyAppBar test', (WidgetTester tester) async {
+    await tester.pumpWidget(
+        createWidgetForTesting(Builder(builder: (BuildContext context) {
+      return MyAppBar(context, "Home", false);
+    })));
+
+    // verify if Title at Home Screen is 'Home'
+    expect(find.text('Home'), findsOneWidget);
+
+    // verify if Back button is invisible at Home screen
+    expect(find.byIcon(Icons.arrow_back_ios), findsNothing);
   });
 }

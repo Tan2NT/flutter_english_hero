@@ -122,6 +122,7 @@ class _AuthCardState extends State<AuthCard>
               child: Column(
                 children: [
                   TextFormField(
+                    key: const Key('tff_email'),
                     decoration: InputDecoration(labelText: 'email_label'.tr()),
                     keyboardType: TextInputType.emailAddress,
                     validator: (value) {
@@ -134,6 +135,7 @@ class _AuthCardState extends State<AuthCard>
                     },
                   ),
                   TextFormField(
+                    key: const Key('tff_password'),
                     decoration: InputDecoration(labelText: 'password'.tr()),
                     obscureText: true,
                     controller: _passwordController,
@@ -179,6 +181,7 @@ class _AuthCardState extends State<AuthCard>
                   else
                     // ignore: deprecated_member_use
                     RaisedButton(
+                      key: const Key('btn_submit'),
                       onPressed: _submit,
                       child: Text(_authMode == AuthMode.login
                           ? 'login'.tr()
@@ -194,6 +197,7 @@ class _AuthCardState extends State<AuthCard>
                   // ignore: deprecated_member_use
                   FlatButton(
                     onPressed: _switchAuthMode,
+                    key: const Key('btn_login_switch'),
                     child: Text(
                         '${_authMode == AuthMode.login ? 'sign_up'.tr() : 'login'.tr()} instead'
                             .tr()),
