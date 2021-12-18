@@ -15,7 +15,7 @@ import 'package:provider/provider.dart';
 
 import '../presentation/provider/user_provider.dart';
 import '../ui/helpers/custom_route.dart';
-import '../ui/main/splash_screen.dart';
+import '../ui/base/splash_screen.dart';
 import '../ui/main/authentication/auth_screen.dart';
 
 class Application extends StatelessWidget {
